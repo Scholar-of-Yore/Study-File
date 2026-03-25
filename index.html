@@ -260,6 +260,10 @@ function findMat(id) {
   return null;
 }
 
+var NO_TABS = ['basket'];
+
+var NO_TABS = ['basket', 'orientation', 'spe-s4'];
+
 function openDrawer(id) {
   var m = findMat(id);
   if (!m) return;
@@ -269,6 +273,7 @@ function openDrawer(id) {
   document.getElementById('d-title').textContent = m.name + (m.sub ? ' — ' + m.sub : '');
   var tabs = document.querySelectorAll('.d-tab');
   for (var i=0; i<tabs.length; i++) tabs[i].classList.toggle('on', i===0);
+  document.querySelector('.drawer-tabs').style.display = (NO_TABS.indexOf(id) === -1) ? 'flex' : 'none';
   renderDrawer();
   document.getElementById('overlay').classList.add('open');
   document.getElementById('drawer').classList.add('open');
@@ -291,9 +296,11 @@ function setTab(tab, el) {
 
 function renderDrawer() {
   var allDocs = DOCS[curMat] || [];
+  var noTabs = NO_TABS.indexOf(curMat) !== -1;
   var fournis = allDocs.filter(function(d){ return d.type==='fourni'||d.type==='sujet'; });
-  var mine = allDocs.filter(function(d){ return d.type!=='fourni'&&d.type!=='sujet'; });
-  if (curTab!=='all') mine = mine.filter(function(d){ return d.type===curTab; });
+  var scholar = allDocs.filter(function(d){ return d.type==='scholar'; });
+  var mine = allDocs.filter(function(d){ return d.type!=='fourni'&&d.type!=='sujet'&&d.type!=='scholar'; });
+  if (!noTabs && curTab!=='all') mine = mine.filter(function(d){ return d.type===curTab; });
 
   var h = '';
 
@@ -305,37 +312,57 @@ function renderDrawer() {
       var abbr = d.type==='sujet'?'SUJ':'DOC';
       var label = d.type==='sujet'?'Sujet type':'Document prof';
       h += '<div class="ddoc">' +
-        '<div class="ddoc-header" onclick="toggle(\'f'+i+'\')">' +
+        '<div class="ddoc-header" onclick="toggle('f'+i+'')">' +
           '<div class="ddoc-icon" style="background:'+bg+';color:'+col+'">'+abbr+'</div>' +
           '<div><div class="ddoc-title">'+d.title+'</div><div class="ddoc-sub">'+label+' · '+d.date+'</div></div>' +
           '<span class="ddoc-toggle" id="ft'+i+'">▾</span>' +
         '</div>' +
         '<div class="ddoc-content" id="f'+i+'">' +
           '<p class="ddoc-desc">'+d.desc+'</p>' +
-          '<a class="pdf-btn" href="#" onclick="openPdf(event,\''+d.pdf+'\',\''+d.title+'\')">Ouvrir le PDF</a>' +
+          '<a class="pdf-btn" href="#" onclick="openPdf(event,''+d.pdf+'',''+d.title+'')">Ouvrir le PDF</a>' +
         '</div>' +
       '</div>';
     });
   }
 
-  h += '<div class="sec-label" style="margin-top:'+(fournis.length?'1.5rem':'0')+'">Mes notes</div>';
-
-  if (!mine.length) {
-    h += '<div class="empty-drawer"><div class="empty-title">Aucune note personnelle</div><div class="empty-sub">Ajoute tes CM, TD et fiches dans le tableau DOCS.</div></div>';
+  if (noTabs) {
+    h += '<div class="sec-label" style="margin-top:'+(fournis.length?'1.5rem':'0')+'">Documents personnels</div>';
+    if (scholar.length) {
+      scholar.forEach(function(d,i) {
+        h += '<div class="ddoc">' +
+          '<div class="ddoc-header" onclick="toggle('s'+i+'')">' +
+            '<div class="ddoc-icon" style="background:#F0EAF5;color:#4A1B6B">SCH</div>' +
+            '<div><div class="ddoc-title">'+d.title+'</div><div class="ddoc-sub">'+(d.date||'')+'</div></div>' +
+            '<span class="ddoc-toggle" id="st'+i+'">▾</span>' +
+          '</div>' +
+          '<div class="ddoc-content" id="s'+i+'">' +
+            (d.content||'') +
+            (d.pdf?'<a class="pdf-btn" href="#" onclick="openPdf(event,''+d.pdf+'',''+d.title+'')">Ouvrir le PDF</a>':'') +
+          '</div>' +
+        '</div>';
+      });
+    } else {
+      h += '<div class="empty-drawer"><div class="empty-title">Aucun document personnel</div><div class="empty-sub">Ajoute tes propres ressources avec type: 'scholar'.</div></div>';
+    }
   } else {
-    mine.forEach(function(d,i) {
-      h += '<div class="ddoc">' +
-        '<div class="ddoc-header" onclick="toggle(\'m'+i+'\')">' +
-          '<div class="ddoc-icon" style="background:#EAF2EA;color:#2C5F2E">'+d.type.slice(0,2).toUpperCase()+'</div>' +
-          '<div><div class="ddoc-title">'+d.title+'</div><div class="ddoc-sub">'+d.type+(d.date?' · '+d.date:'')+'</div></div>' +
-          '<span class="ddoc-toggle" id="mt'+i+'">▾</span>' +
-        '</div>' +
-        '<div class="ddoc-content" id="m'+i+'">' +
-          (d.content||'') +
-          (d.pdf?'<a class="pdf-btn" href="#" onclick="openPdf(event,\''+d.pdf+'\',\''+d.title+'\')">Ouvrir le PDF</a>':'') +
-        '</div>' +
-      '</div>';
-    });
+    h += '<div class="sec-label" style="margin-top:'+(fournis.length?'1.5rem':'0')+'">Mes notes</div>';
+    if (!mine.length) {
+      h += '<div class="empty-drawer"><div class="empty-title">Aucune note personnelle</div><div class="empty-sub">Ajoute tes CM, TD et fiches dans le tableau DOCS.</div></div>';
+    } else {
+      mine.forEach(function(d,i) {
+        h += '<div class="ddoc">' +
+          '<div class="ddoc-header" onclick="toggle('m'+i+'')">' +
+            '<div class="ddoc-icon" style="background:#EAF2EA;color:#2C5F2E">'+d.type.slice(0,2).toUpperCase()+'</div>' +
+            '<div><div class="ddoc-title">'+d.title+'</div><div class="ddoc-sub">'+d.type+(d.date?' · '+d.date:'')+'</div></div>' +
+            '<span class="ddoc-toggle" id="mt'+i+'">▾</span>' +
+          '</div>' +
+          '<div class="ddoc-content" id="m'+i+'">' +
+            (d.content||'') +
+            (d.pdf?'<a class="pdf-btn" href="#" onclick="openPdf(event,''+d.pdf+'',''+d.title+'')">Ouvrir le PDF</a>':'') +
+          '</div>' +
+        '</div>';
+      });
+    }
   }
 
   document.getElementById('d-body').innerHTML = h;
