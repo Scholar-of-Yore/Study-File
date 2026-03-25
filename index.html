@@ -228,7 +228,7 @@ function buildGrid(list, gridId, sem) {
 buildGrid(S4, 'grid-s4', 'S4');
 
 function findMat(id) {
-  var all = S3.concat(S4);
+  var all = S4;
   for (var i = 0; i < all.length; i++) {
     if (all[i].id === id) return all[i];
   }
@@ -242,7 +242,7 @@ function openDrawer(id) {
   curTab = 'all';
   var inS4 = false;
   for (var i = 0; i < S4.length; i++) { if (S4[i].id === id) { inS4 = true; break; } }
-  document.getElementById('d-eyebrow').textContent = 'L2 \u00b7 Semestre ' + (inS4 ? 'S4' : 'S3');
+  document.getElementById('d-eyebrow').textContent = 'L2 \u00b7 Semestre S4';
   document.getElementById('d-title').textContent = m.name + (m.sub ? ' \u2014 ' + m.sub : '');
   var tabs = document.querySelectorAll('.d-tab');
   for (var t = 0; t < tabs.length; t++) tabs[t].classList.toggle('on', t === 0);
