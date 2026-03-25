@@ -95,6 +95,7 @@ nav { background: var(--surface); border-bottom: 1px solid var(--border); height
   border-radius: var(--radius);
   padding: 2rem;
   box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  margin-top: 2.5rem;
   margin-bottom: 2rem;
 }
 .exams-title { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--text); margin-bottom: .4rem; }
@@ -112,6 +113,7 @@ nav { background: var(--surface); border-bottom: 1px solid var(--border); height
 .exam-date-block { flex-shrink: 0; text-align: center; width: 56px; }
 .exam-day { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--text); line-height: 1; }
 .exam-month { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .06em; margin-top: 2px; }
+.exam-dayname { font-size: 12px; font-weight: 500; color: var(--text2); margin-top: 4px; }
 .exam-divider { width: 1px; height: 40px; background: var(--border); flex-shrink: 0; }
 .exam-info { flex: 1; min-width: 0; }
 .exam-name { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
@@ -149,6 +151,86 @@ nav { background: var(--surface); border-bottom: 1px solid var(--border); height
     <div class="week-label" id="week-label"></div>
     <div class="day-grid" id="day-grid"></div>
   </div>
+  <div class="exams-card">
+    <div class="exams-title">Partiels — Session 1</div>
+    <div class="exams-sub">Du 21 au 23 avril 2026 &middot; Bât 427 Amphi Cartan</div>
+    <div class="exam-list">
+
+      <div class="exam-item">
+        <div class="exam-date-block">
+          <div class="exam-day">21</div>
+          <div class="exam-month">Avr.</div>
+          <div class="exam-dayname">Mardi</div>
+        </div>
+        <div class="exam-divider"></div>
+        <div class="exam-info">
+          <div class="exam-name">IMS 1</div>
+          <div class="exam-detail">W. Barrière &middot; Questions rédaction &middot; Aucun document</div>
+        </div>
+        <div class="exam-right">
+          <div class="exam-time">09h30 – 12h00</div>
+          <div class="exam-duration">2h30</div>
+          <div class="exam-room">Bât 427 Amphi Cartan</div>
+        </div>
+      </div>
+
+      <div class="exam-item">
+        <div class="exam-date-block">
+          <div class="exam-day">21</div>
+          <div class="exam-month">Avr.</div>
+          <div class="exam-dayname">Mardi</div>
+        </div>
+        <div class="exam-divider"></div>
+        <div class="exam-info">
+          <div class="exam-name">Polyvalences</div>
+          <div class="exam-detail">Musculation, CO, Basket, Escalade &middot; Questions, rédaction, exercices</div>
+        </div>
+        <div class="exam-right">
+          <div class="exam-time">13h30 – 15h30</div>
+          <div class="exam-duration">2h00</div>
+          <div class="exam-room">Bât 427 Amphi Cartan</div>
+        </div>
+      </div>
+
+      <div class="exam-item">
+        <div class="exam-date-block">
+          <div class="exam-day">22</div>
+          <div class="exam-month">Avr.</div>
+          <div class="exam-dayname">Mercredi</div>
+        </div>
+        <div class="exam-divider"></div>
+        <div class="exam-info">
+          <div class="exam-name">FSH</div>
+          <div class="exam-detail">Y. Imine &middot; Questions rédaction &middot; Aucun document</div>
+        </div>
+        <div class="exam-right">
+          <div class="exam-time">13h45 – 17h45</div>
+          <div class="exam-duration">4h00</div>
+          <div class="exam-room">Bât 427 Amphi Cartan</div>
+        </div>
+      </div>
+
+      <div class="exam-item">
+        <div class="exam-date-block">
+          <div class="exam-day">23</div>
+          <div class="exam-month">Avr.</div>
+          <div class="exam-dayname">Jeudi</div>
+        </div>
+        <div class="exam-divider"></div>
+        <div class="exam-info">
+          <div class="exam-name">Spécialité sportive — Théorie</div>
+          <div class="exam-detail">Selon spécialité &middot; Aucun document</div>
+        </div>
+        <div class="exam-right">
+          <div class="exam-time">08h30 – 10h00</div>
+          <div class="exam-duration">1h30</div>
+          <div class="exam-room">Bât 337 Salle 2</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 
 <script>
