@@ -15,7 +15,6 @@
   --radius: 14px; --radius-sm: 9px;
 }
 body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-
 nav { background: var(--surface); border-bottom: 1px solid var(--border); height: 58px; display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; }
 .logo { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--text); text-decoration: none; }
 .logo em { color: var(--green); font-style: normal; }
@@ -23,7 +22,6 @@ nav { background: var(--surface); border-bottom: 1px solid var(--border); height
 .nav-links a { font-size: 13px; color: var(--text2); text-decoration: none; padding: 6px 14px; border-radius: 99px; transition: background .15s; }
 .nav-links a:hover { background: var(--surface2); color: var(--text); }
 .nav-links a.on { background: var(--green-light); color: var(--green); font-weight: 500; }
-
 .hero { background: var(--surface); border-bottom: 1px solid var(--border); padding: 3.5rem 3rem 3rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; }
 .hero-eyebrow { font-size: 11px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: .1em; margin-bottom: .6rem; }
 .hero-title { font-family: 'Playfair Display', serif; font-size: 48px; color: var(--text); letter-spacing: -1px; line-height: 1.1; margin-bottom: .75rem; }
@@ -31,14 +29,12 @@ nav { background: var(--surface); border-bottom: 1px solid var(--border); height
 .hero-stats { display: flex; gap: 2rem; align-items: flex-end; flex-shrink: 0; }
 .hero-stat-val { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--text); line-height: 1; text-align: right; }
 .hero-stat-lbl { font-size: 12px; color: var(--text3); margin-top: 3px; text-align: right; }
-
 .main { max-width: 980px; margin: 0 auto; padding: 3rem 2rem 6rem; }
 .sem-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.5rem; }
 .sem-title { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--text); }
 .sem-count { font-size: 13px; color: var(--text3); }
 .sem-block { margin-bottom: 4rem; }
 .mat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-
 .mat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; cursor: pointer; transition: box-shadow .2s, transform .2s, border-color .2s; position: relative; overflow: hidden; user-select: none; }
 .mat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: currentColor; opacity: .18; }
 .mat-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,.10); transform: translateY(-2px); border-color: var(--border-md); }
@@ -52,25 +48,19 @@ nav { background: var(--surface); border-bottom: 1px solid var(--border); height
 .mat-footer { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
 .mat-footer-count { font-size: 12px; color: var(--text3); }
 .mat-open-btn { font-size: 12px; color: var(--text2); }
-
 #overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(18,16,10,.45); z-index: 200; }
 #overlay.open { display: block; }
-
 #drawer { position: fixed; top: 0; right: 0; width: 520px; max-width: 92vw; height: 100%; background: var(--surface); z-index: 300; display: flex; flex-direction: column; overflow: hidden; transform: translateX(100%); transition: transform .28s ease; box-shadow: -4px 0 32px rgba(0,0,0,.12); }
 #drawer.open { transform: translateX(0); }
-
 .drawer-header { padding: 1.75rem 1.75rem 1.25rem; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-shrink: 0; }
 .drawer-eyebrow { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 5px; }
 .drawer-title { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--text); }
 .drawer-close { width: 32px; height: 32px; border-radius: 50%; background: var(--surface2); border: none; cursor: pointer; font-size: 16px; color: var(--text2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .drawer-close:hover { background: var(--border-md); }
-
 .drawer-tabs { display: flex; gap: 2px; padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); flex-shrink: 0; }
 .d-tab { flex: 1; text-align: center; padding: 7px; font-size: 13px; border-radius: var(--radius-sm); cursor: pointer; border: none; background: none; color: var(--text2); font-family: 'DM Sans', sans-serif; }
 .d-tab.on { background: var(--bg); color: var(--text); font-weight: 500; }
-
 .drawer-body { flex: 1; overflow-y: auto; padding: 1.5rem 1.75rem; }
-
 .sec-label { font-size: 11px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: .08em; margin-bottom: .75rem; padding-bottom: .6rem; border-bottom: 1px solid var(--border); }
 .ddoc { border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 10px; overflow: hidden; }
 .ddoc-header { display: flex; align-items: center; gap: 12px; padding: .9rem 1.1rem; cursor: pointer; }
@@ -87,7 +77,6 @@ nav { background: var(--surface); border-bottom: 1px solid var(--border); height
 .empty-drawer { text-align: center; padding: 2rem .5rem; }
 .empty-title { font-size: 14px; font-weight: 500; color: var(--text2); margin-bottom: 4px; }
 .empty-sub { font-size: 13px; color: var(--text3); }
-
 #pdf-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10,8,4,.7); z-index: 500; padding: 4vh 5vw; }
 #pdf-modal.open { display: block; }
 .pdf-modal-inner { background: #fff; border-radius: 12px; overflow: hidden; width: 100%; height: 100%; display: flex; flex-direction: column; }
@@ -96,10 +85,8 @@ nav { background: var(--surface); border-bottom: 1px solid var(--border); height
 .pdf-modal-close { background: var(--surface2); border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 14px; color: var(--text2); }
 .pdf-modal-close:hover { background: var(--border-md); }
 #pdf-frame { flex: 1; border: none; width: 100%; height: 100%; }
-
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-thumb { background: var(--border-md); border-radius: 99px; }
-
 @media (max-width: 720px) {
   nav { padding: 0 1.25rem; }
   .hero { flex-direction: column; padding: 2rem 1.5rem; }
@@ -167,7 +154,7 @@ nav { background: var(--surface); border-bottom: 1px solid var(--border); height
     </div>
     <button class="drawer-close" onclick="closeDrawer()">&#x2715;</button>
   </div>
-  <div class="drawer-tabs">
+  <div class="drawer-tabs" id="drawer-tabs">
     <button class="d-tab on" onclick="setTab('all',this)">Tous</button>
     <button class="d-tab" onclick="setTab('cm',this)">CM</button>
     <button class="d-tab" onclick="setTab('td',this)">TD</button>
@@ -188,39 +175,54 @@ nav { background: var(--surface); border-bottom: 1px solid var(--border); height
 
 <script>
 var S3 = [
-  {id:'biomeca',        name:'Biomécanique',  abbr:'BM', color:'#1B3A6B', bg:'#EBF0FA'},
-  {id:'anatomie',       name:'Anatomie',       abbr:'AN', color:'#2C5F2E', bg:'#EAF2EA'},
-  {id:'physionomi',     name:'Physionomie',    abbr:'PH', color:'#6B2C52', bg:'#F5EAF0'},
-  {id:'psycho',         name:'Psychologie',    abbr:'PS', color:'#6B4F1B', bg:'#F5F0EA'},
-  {id:'neuro',          name:'Neurologie',     abbr:'NE', color:'#1B3A6B', bg:'#EBF0FA'},
-  {id:'socio',          name:'Sociologie',     abbr:'SO', color:'#2C5F2E', bg:'#EAF2EA'},
-  {id:'histoire',       name:'Histoire',       abbr:'HI', color:'#6B2C52', bg:'#F5EAF0'},
-  {id:'anglais-s3',     name:'Anglais',        abbr:'EN', color:'#1B5A5E', bg:'#EAF4F4'},
-  {id:'poly-s3',        name:'Polyvalence',    abbr:'PO', color:'#6B4F1B', bg:'#F5F0EA'},
-  {id:'spe-s3',         name:'Spécialité',     abbr:'SP', color:'#4A1B6B', bg:'#F0EAF5'}
+  {id:'biomeca',      name:'Biomécanique',  abbr:'BM', color:'#1B3A6B', bg:'#EBF0FA'},
+  {id:'anatomie',     name:'Anatomie',       abbr:'AN', color:'#2C5F2E', bg:'#EAF2EA'},
+  {id:'physionomi',   name:'Physionomie',    abbr:'PH', color:'#6B2C52', bg:'#F5EAF0'},
+  {id:'psycho',       name:'Psychologie',    abbr:'PS', color:'#6B4F1B', bg:'#F5F0EA'},
+  {id:'neuro',        name:'Neurologie',     abbr:'NE', color:'#1B3A6B', bg:'#EBF0FA'},
+  {id:'socio',        name:'Sociologie',     abbr:'SO', color:'#2C5F2E', bg:'#EAF2EA'},
+  {id:'histoire',     name:'Histoire',       abbr:'HI', color:'#6B2C52', bg:'#F5EAF0'},
+  {id:'anglais-s3',   name:'Anglais',        abbr:'EN', color:'#1B5A5E', bg:'#EAF4F4'},
+  {id:'poly-s3',      name:'Polyvalence',    abbr:'PO', color:'#6B4F1B', bg:'#F5F0EA'},
+  {id:'spe-s3',       name:'Spécialité',     abbr:'SP', color:'#4A1B6B', bg:'#F0EAF5'}
 ];
 
 var S4 = [
-  {id:'fsh',            name:'FSH',            abbr:'FS', color:'#1B5A5E', bg:'#EAF4F4'},
-  {id:'ims',            name:'IMS',            abbr:'IM', color:'#4A1B6B', bg:'#F0EAF5'},
-  {id:'sante-eps',      name:'Santé EPS',      abbr:'SA', color:'#2C5F2E', bg:'#EAF2EA'},
-  {id:'anglais-s4',     name:'Anglais',        abbr:'EN', color:'#5E3A1B', bg:'#F5EEE8'},
-  {id:'basket',         name:'Polyvalence 1',  abbr:'P1', color:'#1B3A6B', bg:'#EBF0FA', sub:'Basketball'},
-  {id:'orientation',    name:'Polyvalence 2',  abbr:'P2', color:'#2C5F2E', bg:'#EAF2EA', sub:"Course d'orientation"},
-  {id:'spe-s4',         name:'Spécialité',     abbr:'JD', color:'#6B2C52', bg:'#F5EAF0', sub:'Judo'}
+  {id:'fsh',          name:'FSH',            abbr:'FS', color:'#1B5A5E', bg:'#EAF4F4'},
+  {id:'ims',          name:'IMS',            abbr:'IM', color:'#4A1B6B', bg:'#F0EAF5'},
+  {id:'sante-eps',    name:'Santé EPS',      abbr:'SA', color:'#2C5F2E', bg:'#EAF2EA'},
+  {id:'anglais-s4',   name:'Anglais',        abbr:'EN', color:'#5E3A1B', bg:'#F5EEE8'},
+  {id:'basket',       name:'Polyvalence 1',  abbr:'P1', color:'#1B3A6B', bg:'#EBF0FA', sub:'Basketball'},
+  {id:'orientation',  name:'Polyvalence 2',  abbr:'P2', color:'#2C5F2E', bg:'#EAF2EA', sub:"Course d'orientation"},
+  {id:'spe-s4',       name:'Spécialité',     abbr:'JD', color:'#6B2C52', bg:'#F5EAF0', sub:'Judo'}
 ];
+
+// Matières sans onglets CM/TD/Fiches (sports)
+var NO_TABS = ['basket', 'orientation', 'spe-s4', 'spe-s3', 'poly-s3'];
 
 var DOCS = {
   basket: [
-    {type:'fourni', title:'Connaissances de base', date:'W. Barrière — 2025-2026',
-     desc:"Références culturelles, essence du basketball, terrain, règlement, violations, fautes et arbitrage.",
-     pdf:'docs/basket/Basket_connaissance_de_base.pdf'},
-    {type:'fourni', title:'Apports théoriques', date:'W. Barrière — 2025-2026',
-     desc:"Règlement détaillé, formes de pratiques sociales, connaissances tactiques et techniques.",
-     pdf:'docs/basket/Basket_apports_theoriques.pdf'},
-    {type:'sujet', title:'Sujet type — Partiel', date:'W. Barrière — 2025-2026',
-     desc:"20 questions possibles à l'examen : règles, terrain, violations, fautes, tactiques.",
-     pdf:'docs/basket/Basket_SUJET_TYPE.pdf'}
+    {
+      type: 'fourni',
+      title: 'Connaissances de base',
+      date: 'W. Barrière — 2025-2026',
+      desc: 'Références culturelles, essence du basketball, terrain, règlement, violations, fautes et arbitrage.',
+      pdf: 'docs/basket/Basket_connaissance_de_base.pdf'
+    },
+    {
+      type: 'fourni',
+      title: 'Apports théoriques',
+      date: 'W. Barrière — 2025-2026',
+      desc: 'Règlement détaillé, formes de pratiques sociales, connaissances tactiques et techniques.',
+      pdf: 'docs/basket/Basket_apports_theoriques.pdf'
+    },
+    {
+      type: 'fourni',
+      title: 'Sujet type — Partiel',
+      date: 'W. Barrière — 2025-2026',
+      desc: "20 questions possibles à l'examen : règles, terrain, violations, fautes, tactiques.",
+      pdf: 'docs/basket/Basket_SUJET_TYPE.pdf'
+    }
   ]
 };
 
@@ -236,17 +238,19 @@ function buildGrid(list, gridId, sem) {
     el.style.color = m.color;
     el.innerHTML =
       '<div class="mat-card-top">' +
-        '<div class="mat-icon" style="background:'+m.bg+';color:'+m.color+'">'+m.abbr+'</div>' +
-        '<span class="mat-badge" style="background:'+m.bg+';color:'+m.color+'">'+sem+'</span>' +
+        '<div class="mat-icon" style="background:' + m.bg + ';color:' + m.color + '">' + m.abbr + '</div>' +
+        '<span class="mat-badge" style="background:' + m.bg + ';color:' + m.color + '">' + sem + '</span>' +
       '</div>' +
-      '<div class="mat-name">'+m.name+'</div>' +
-      '<div class="mat-full">'+(m.sub||'')+'</div>' +
+      '<div class="mat-name">' + m.name + '</div>' +
+      '<div class="mat-full">' + (m.sub || '') + '</div>' +
       '<div class="mat-docs"><span class="doc-chip">CM</span><span class="doc-chip">TD</span><span class="doc-chip">Fiches</span></div>' +
       '<div class="mat-footer">' +
-        '<span class="mat-footer-count">'+(n>0?n+' document'+(n>1?'s':''):'0 document')+'</span>' +
-        '<span class="mat-open-btn">Ouvrir →</span>' +
+        '<span class="mat-footer-count">' + (n > 0 ? n + ' document' + (n > 1 ? 's' : '') : '0 document') + '</span>' +
+        '<span class="mat-open-btn">Ouvrir \u2192</span>' +
       '</div>';
-    (function(id){ el.addEventListener('click', function(){ openDrawer(id); }); })(m.id);
+    (function(id) {
+      el.addEventListener('click', function() { openDrawer(id); });
+    })(m.id);
     g.appendChild(el);
   });
 }
@@ -256,24 +260,25 @@ buildGrid(S4, 'grid-s4', 'S4');
 
 function findMat(id) {
   var all = S3.concat(S4);
-  for (var i=0; i<all.length; i++) if (all[i].id===id) return all[i];
+  for (var i = 0; i < all.length; i++) {
+    if (all[i].id === id) return all[i];
+  }
   return null;
 }
-
-var NO_TABS = ['basket'];
-
-var NO_TABS = ['basket', 'orientation', 'spe-s4'];
 
 function openDrawer(id) {
   var m = findMat(id);
   if (!m) return;
   curMat = id;
   curTab = 'all';
-  document.getElementById('d-eyebrow').textContent = 'L2 · Semestre ' + (S4.indexOf(m) >= 0 ? 'S4' : 'S3');
-  document.getElementById('d-title').textContent = m.name + (m.sub ? ' — ' + m.sub : '');
+  var inS4 = false;
+  for (var i = 0; i < S4.length; i++) { if (S4[i].id === id) { inS4 = true; break; } }
+  document.getElementById('d-eyebrow').textContent = 'L2 \u00b7 Semestre ' + (inS4 ? 'S4' : 'S3');
+  document.getElementById('d-title').textContent = m.name + (m.sub ? ' \u2014 ' + m.sub : '');
   var tabs = document.querySelectorAll('.d-tab');
-  for (var i=0; i<tabs.length; i++) tabs[i].classList.toggle('on', i===0);
-  document.querySelector('.drawer-tabs').style.display = (NO_TABS.indexOf(id) === -1) ? 'flex' : 'none';
+  for (var t = 0; t < tabs.length; t++) tabs[t].classList.toggle('on', t === 0);
+  var noTabs = NO_TABS.indexOf(id) !== -1;
+  document.getElementById('drawer-tabs').style.display = noTabs ? 'none' : 'flex';
   renderDrawer();
   document.getElementById('overlay').classList.add('open');
   document.getElementById('drawer').classList.add('open');
@@ -289,7 +294,7 @@ function closeDrawer() {
 function setTab(tab, el) {
   curTab = tab;
   var tabs = document.querySelectorAll('.d-tab');
-  for (var i=0; i<tabs.length; i++) tabs[i].classList.remove('on');
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('on');
   el.classList.add('on');
   renderDrawer();
 }
@@ -297,83 +302,96 @@ function setTab(tab, el) {
 function renderDrawer() {
   var allDocs = DOCS[curMat] || [];
   var noTabs = NO_TABS.indexOf(curMat) !== -1;
-  var fournis = allDocs.filter(function(d){ return d.type==='fourni'||d.type==='sujet'; });
-  var scholar = allDocs.filter(function(d){ return d.type==='scholar'; });
-  var mine = allDocs.filter(function(d){ return d.type!=='fourni'&&d.type!=='sujet'&&d.type!=='scholar'; });
-  if (!noTabs && curTab!=='all') mine = mine.filter(function(d){ return d.type===curTab; });
+
+  var fournis = [];
+  var scholar = [];
+  var mine = [];
+
+  for (var i = 0; i < allDocs.length; i++) {
+    var d = allDocs[i];
+    if (d.type === 'fourni' || d.type === 'sujet') {
+      fournis.push(d);
+    } else if (d.type === 'scholar') {
+      scholar.push(d);
+    } else {
+      if (noTabs || curTab === 'all' || d.type === curTab) {
+        mine.push(d);
+      }
+    }
+  }
 
   var h = '';
 
-  if (fournis.length) {
+  // Section : Documents fournis par le prof
+  if (fournis.length > 0) {
     h += '<div class="sec-label">Documents fournis par le prof</div>';
-    fournis.forEach(function(d,i) {
-      var bg = d.type==='sujet'?'#FBF0E3':'#EBF0FA';
-      var col = d.type==='sujet'?'#7A3D10':'#1B3A6B';
-      var abbr = d.type==='sujet'?'SUJ':'DOC';
-      var label = d.type==='sujet'?'Sujet type':'Document prof';
-      h += '<div class="ddoc">' +
-        '<div class="ddoc-header" onclick="toggle('f'+i+'')">' +
-          '<div class="ddoc-icon" style="background:'+bg+';color:'+col+'">'+abbr+'</div>' +
-          '<div><div class="ddoc-title">'+d.title+'</div><div class="ddoc-sub">'+label+' · '+d.date+'</div></div>' +
-          '<span class="ddoc-toggle" id="ft'+i+'">▾</span>' +
-        '</div>' +
-        '<div class="ddoc-content" id="f'+i+'">' +
-          '<p class="ddoc-desc">'+d.desc+'</p>' +
-          '<a class="pdf-btn" href="#" onclick="openPdf(event,''+d.pdf+'',''+d.title+'')">Ouvrir le PDF</a>' +
-        '</div>' +
-      '</div>';
-    });
+    for (var fi = 0; fi < fournis.length; fi++) {
+      var d = fournis[fi];
+      var bg = d.type === 'sujet' ? '#FBF0E3' : '#EBF0FA';
+      var col = d.type === 'sujet' ? '#7A3D10' : '#1B3A6B';
+      var abbr = d.type === 'sujet' ? 'SUJ' : 'DOC';
+      var label = d.type === 'sujet' ? 'Sujet type' : 'Document prof';
+      h += '<div class="ddoc">';
+      h += '<div class="ddoc-header" onclick="toggleDoc(' + fi + ',\'f\')">';
+      h += '<div class="ddoc-icon" style="background:' + bg + ';color:' + col + '">' + abbr + '</div>';
+      h += '<div><div class="ddoc-title">' + d.title + '</div>';
+      h += '<div class="ddoc-sub">' + label + ' \u00b7 ' + d.date + '</div></div>';
+      h += '<span class="ddoc-toggle" id="ftog' + fi + '">\u25be</span>';
+      h += '</div>';
+      h += '<div class="ddoc-content" id="fdoc' + fi + '">';
+      h += '<p class="ddoc-desc">' + d.desc + '</p>';
+      h += '<a class="pdf-btn" href="' + d.pdf + '" target="_blank">Ouvrir le PDF</a>';
+      h += '</div></div>';
+    }
   }
 
-  if (noTabs) {
-    h += '<div class="sec-label" style="margin-top:'+(fournis.length?'1.5rem':'0')+'">Documents personnels</div>';
-    if (scholar.length) {
-      scholar.forEach(function(d,i) {
-        h += '<div class="ddoc">' +
-          '<div class="ddoc-header" onclick="toggle('s'+i+'')">' +
-            '<div class="ddoc-icon" style="background:#F0EAF5;color:#4A1B6B">SCH</div>' +
-            '<div><div class="ddoc-title">'+d.title+'</div><div class="ddoc-sub">'+(d.date||'')+'</div></div>' +
-            '<span class="ddoc-toggle" id="st'+i+'">▾</span>' +
-          '</div>' +
-          '<div class="ddoc-content" id="s'+i+'">' +
-            (d.content||'') +
-            (d.pdf?'<a class="pdf-btn" href="#" onclick="openPdf(event,''+d.pdf+'',''+d.title+'')">Ouvrir le PDF</a>':'') +
-          '</div>' +
-        '</div>';
-      });
+  // Section : Documents personnels (sport) ou Mes notes (théorique)
+  var secTitle = noTabs ? 'Documents personnels' : 'Mes notes';
+  var topMargin = fournis.length > 0 ? '1.5rem' : '0';
+  h += '<div class="sec-label" style="margin-top:' + topMargin + '">' + secTitle + '</div>';
+
+  var personalDocs = noTabs ? scholar : mine;
+
+  if (personalDocs.length === 0) {
+    h += '<div class="empty-drawer">';
+    h += '<div class="empty-title">Aucun document</div>';
+    if (noTabs) {
+      h += '<div class="empty-sub">Ajoute tes ressources personnelles avec type: scholar.</div>';
     } else {
-      h += '<div class="empty-drawer"><div class="empty-title">Aucun document personnel</div><div class="empty-sub">Ajoute tes propres ressources avec type: 'scholar'.</div></div>';
+      h += '<div class="empty-sub">Ajoute tes CM, TD et fiches dans le tableau DOCS.</div>';
     }
+    h += '</div>';
   } else {
-    h += '<div class="sec-label" style="margin-top:'+(fournis.length?'1.5rem':'0')+'">Mes notes</div>';
-    if (!mine.length) {
-      h += '<div class="empty-drawer"><div class="empty-title">Aucune note personnelle</div><div class="empty-sub">Ajoute tes CM, TD et fiches dans le tableau DOCS.</div></div>';
-    } else {
-      mine.forEach(function(d,i) {
-        h += '<div class="ddoc">' +
-          '<div class="ddoc-header" onclick="toggle('m'+i+'')">' +
-            '<div class="ddoc-icon" style="background:#EAF2EA;color:#2C5F2E">'+d.type.slice(0,2).toUpperCase()+'</div>' +
-            '<div><div class="ddoc-title">'+d.title+'</div><div class="ddoc-sub">'+d.type+(d.date?' · '+d.date:'')+'</div></div>' +
-            '<span class="ddoc-toggle" id="mt'+i+'">▾</span>' +
-          '</div>' +
-          '<div class="ddoc-content" id="m'+i+'">' +
-            (d.content||'') +
-            (d.pdf?'<a class="pdf-btn" href="#" onclick="openPdf(event,''+d.pdf+'',''+d.title+'')">Ouvrir le PDF</a>':'') +
-          '</div>' +
-        '</div>';
-      });
+    for (var pi = 0; pi < personalDocs.length; pi++) {
+      var d = personalDocs[pi];
+      var pbg = noTabs ? '#F0EAF5' : '#EAF2EA';
+      var pcol = noTabs ? '#4A1B6B' : '#2C5F2E';
+      var pabbr = noTabs ? 'SCH' : d.type.slice(0, 2).toUpperCase();
+      h += '<div class="ddoc">';
+      h += '<div class="ddoc-header" onclick="toggleDoc(' + pi + ',\'p\')">';
+      h += '<div class="ddoc-icon" style="background:' + pbg + ';color:' + pcol + '">' + pabbr + '</div>';
+      h += '<div><div class="ddoc-title">' + d.title + '</div>';
+      h += '<div class="ddoc-sub">' + (d.date || '') + '</div></div>';
+      h += '<span class="ddoc-toggle" id="ptog' + pi + '">\u25be</span>';
+      h += '</div>';
+      h += '<div class="ddoc-content" id="pdoc' + pi + '">';
+      if (d.content) h += d.content;
+      if (d.pdf) {
+        h += '<a class="pdf-btn" href="' + d.pdf + '" target="_blank">Ouvrir le PDF</a>';
+      }
+      h += '</div></div>';
     }
   }
 
   document.getElementById('d-body').innerHTML = h;
 }
 
-function toggle(id) {
-  var el = document.getElementById(id);
-  if (!el) return;
-  var tog = document.getElementById(id.replace(/^(f|m)(\d+)$/, function(_,p,n){ return p+'t'+n; }));
-  var open = el.classList.toggle('open');
-  if (tog) tog.textContent = open ? '▴' : '▾';
+function toggleDoc(i, prefix) {
+  var content = document.getElementById(prefix + 'doc' + i);
+  var tog = document.getElementById(prefix + 'tog' + i);
+  if (!content) return;
+  var isOpen = content.classList.toggle('open');
+  if (tog) tog.textContent = isOpen ? '\u25b4' : '\u25be';
 }
 
 function openPdf(e, path, title) {
