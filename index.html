@@ -394,6 +394,16 @@ function toggleDoc(i, prefix) {
   if (tog) tog.textContent = isOpen ? '\u25b4' : '\u25be';
 }
 
+function handlePdfClick(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  var path = e.currentTarget.getAttribute('data-pdf');
+  var title = e.currentTarget.getAttribute('data-title');
+  document.getElementById('pdf-name').textContent = title;
+  document.getElementById('pdf-frame').src = path;
+  document.getElementById('pdf-modal').classList.add('open');
+}
+
 function openPdf(e, path, title) {
   e.preventDefault();
   e.stopPropagation();
