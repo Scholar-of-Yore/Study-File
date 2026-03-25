@@ -66,6 +66,49 @@ nav { background: var(--surface); border-bottom: 1px solid var(--border); height
 .slot.cm { color: #1B3A6B; background: #F0F4FB; border-color: #BBCFEE; }
 .slot.td { color: #6B4F1B; background: #FBF7F0; border-color: #E8D5B0; }
 .slot.stage { color: #1B5A5E; background: #F0FAFA; border-color: #B0DEDE; }
+.slot.deadline-pix {
+  color: #1B3A6B;
+  background: #EBF0FA;
+  border: 1.5px dashed #378ADD;
+  border-radius: var(--radius-sm);
+  position: relative;
+}
+.slot.deadline-pix::before { background: #378ADD; width: 4px; }
+.slot.deadline-pix .slot-name { color: #1B3A6B; font-weight: 500; }
+.slot.deadline-pix .slot-time {
+  display: inline-block;
+  background: #378ADD;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 7px;
+  border-radius: 99px;
+  margin-bottom: 6px;
+  letter-spacing: .03em;
+}
+.slot.deadline-pix .slot-detail { color: #185FA5; font-size: 11px; }
+
+.slot.deadline-spoc {
+  color: #4A1B6B;
+  background: #F0EAF5;
+  border: 1.5px dashed #7F77DD;
+  border-radius: var(--radius-sm);
+  position: relative;
+}
+.slot.deadline-spoc::before { background: #7F77DD; width: 4px; }
+.slot.deadline-spoc .slot-name { color: #3C3489; font-weight: 500; }
+.slot.deadline-spoc .slot-time {
+  display: inline-block;
+  background: #7F77DD;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 7px;
+  border-radius: 99px;
+  margin-bottom: 6px;
+  letter-spacing: .03em;
+}
+.slot.deadline-spoc .slot-detail { color: #534AB7; font-size: 11px; }
 .day-empty { text-align: center; padding: 1.5rem .5rem; font-size: 12px; color: var(--text3); }
 .ferie { text-align: center; padding: 1.25rem .5rem; font-size: 12px; color: var(--text3); background: var(--surface); border: 1px dashed var(--border-md); border-radius: var(--radius-sm); }
 @media (max-width: 700px) {
@@ -122,6 +165,7 @@ nav { background: var(--surface); border-bottom: 1px solid var(--border); height
 .exam-time { font-size: 13px; font-weight: 500; color: var(--text); }
 .exam-duration { font-size: 11px; color: var(--text3); margin-top: 2px; }
 .exam-room { font-size: 11px; color: var(--text3); margin-top: 1px; }
+
 </style>
 </head>
 <body>
@@ -231,6 +275,7 @@ nav { background: var(--surface); border-bottom: 1px solid var(--border); height
     </div>
   </div>
 
+
 </div>
 
 <script>
@@ -278,25 +323,33 @@ var WEEKS = [
     label: '16 – 20 mars',
     dates: ['Lun. 16 mars','Mar. 17 mars','Mer. 18 mars','Jeu. 19 mars','Ven. 20 mars'],
     start: new Date(2026,2,16),
-    anglais: false, ri: true, ferieL: false, ims: true, orientation: true
+    anglais: false, ri: true, ferieL: false, ims: true, orientation: true, extra: {2:[{time:'avant 12h00', name:'PIX TD13 à rendre', detail:'Excel', type:'deadline-pix'}]}
   },
   {
     label: '23 – 27 mars',
     dates: ['Lun. 23 mars','Mar. 24 mars','Mer. 25 mars','Jeu. 26 mars','Ven. 27 mars'],
     start: new Date(2026,2,23),
-    anglais: true, ri: false, ferieL: false, ims: false, orientation: false
+    anglais: true, ri: false, ferieL: false, ims: false, orientation: false, extra: {2:[{time:'avant 12h00', name:'PIX TD14 à rendre', detail:'Excel', type:'deadline-pix'}]}
   },
   {
     label: '30 mars – 3 avr.',
     dates: ['Lun. 30 mars','Mar. 31 mars','Mer. 1 avr.','Jeu. 2 avr.','Ven. 3 avr.'],
     start: new Date(2026,2,30),
-    anglais: false, ri: true, ferieL: false, ims: false, orientation: false
+    anglais: false, ri: true, ferieL: false, ims: false, orientation: false, extra: {0:[{time:'avant minuit', name:'SPOC TD7', detail:'Rendu dim. 29/03 avant minuit', type:'deadline-spoc'}]}
   },
   {
     label: '6 – 10 avr.',
     dates: ['Lun. 6 avr.','Mar. 7 avr.','Mer. 8 avr.','Jeu. 9 avr.','Ven. 10 avr.'],
     start: new Date(2026,3,6),
-    anglais: true, ri: false, ferieL: true, ims: false, orientation: false
+    anglais: true, ri: false, ferieL: true, ims: false, orientation: false, extra: {0:[{time:'avant 12h00', name:'PIX TD15 à rendre', detail:'PIX', type:'deadline-pix'}, {time:'avant minuit', name:'SPOC TD8', detail:'Rendu dim. 05/04 avant minuit', type:'deadline-spoc'}], 4:[{time:'avant 12h00', name:'PIX TD16 à rendre', detail:'CT – Excel', type:'deadline-pix'}]}
+  }  ,{
+    label: '13 – 17 avr.',
+    dates: ['Lun. 13 avr.','Mar. 14 avr.','Mer. 15 avr.','Jeu. 16 avr.','Ven. 17 avr.'],
+    start: new Date(2026,3,13),
+    anglais: false, ri: false, ferieL: false, ims: false, orientation: false,
+    extra: {
+      0:[{time:'avant minuit', name:'SPOC TD9', detail:'Rendu dim. 12/04 avant minuit', type:'deadline-spoc'}]
+    }
   }
 ];
 
@@ -316,6 +369,13 @@ function getWeekDays(w) {
   // Supprimer Course d'orientation (vendredi) si terminée
   if (!w.orientation) {
     days[4] = days[4].filter(function(s){ return s.name !== "Course d'orientation"; });
+  }
+
+  // Extra deadlines
+  if (w.extra) {
+    for (var di in w.extra) {
+      w.extra[di].forEach(function(s){ days[di].push(s); });
+    }
   }
 
   return days;
@@ -394,6 +454,15 @@ function render() {
 
     if (di===0 && w.ferieL) {
       html += '<div class="ferie">Jour férié</div>';
+      if (w.extra && w.extra[0]) {
+        w.extra[0].forEach(function(s){
+          html += '<div class="slot '+s.type+'">';
+          html += '<div class="slot-time">'+s.time+'</div>';
+          html += '<div class="slot-name">'+s.name+'</div>';
+          if(s.detail) html += '<div class="slot-detail">'+s.detail+'</div>';
+          html += '</div>';
+        });
+      }
     } else {
       var slots = days[di];
       if (!slots||!slots.length) {
@@ -416,6 +485,8 @@ function render() {
 
 curWeek = detectCurrentWeek();
 render();
+
+
 </script>
 </body>
 </html>
