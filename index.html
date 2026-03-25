@@ -302,107 +302,75 @@ function setTab(tab, el) {
 function renderDrawer() {
   var allDocs = DOCS[curMat] || [];
   var noTabs = NO_TABS.indexOf(curMat) !== -1;
-
-  var fournis = [];
-  var scholar = [];
-  var mine = [];
-
-  for (var i = 0; i < allDocs.length; i++) {
-    var d = allDocs[i];
-    if (d.type === 'fourni' || d.type === 'sujet') {
-      fournis.push(d);
-    } else if (d.type === 'scholar') {
-      scholar.push(d);
-    } else {
-      if (noTabs || curTab === 'all' || d.type === curTab) {
-        mine.push(d);
-      }
-    }
-  }
+  var fournis = allDocs.filter(function(d){ return d.type==='fourni'||d.type==='sujet'; });
+  var scholar = allDocs.filter(function(d){ return d.type==='scholar'; });
+  var mine = allDocs.filter(function(d){ return d.type!=='fourni'&&d.type!=='sujet'&&d.type!=='scholar'; });
+  if (!noTabs && curTab!=='all') mine = mine.filter(function(d){ return d.type===curTab; });
 
   var h = '';
 
-  // Section : Documents fournis par le prof
-  if (fournis.length > 0) {
+  if (fournis.length) {
     h += '<div class="sec-label">Documents fournis par le prof</div>';
-    for (var fi = 0; fi < fournis.length; fi++) {
-      var d = fournis[fi];
-      var bg = d.type === 'sujet' ? '#FBF0E3' : '#EBF0FA';
-      var col = d.type === 'sujet' ? '#7A3D10' : '#1B3A6B';
-      var abbr = d.type === 'sujet' ? 'SUJ' : 'DOC';
-      var label = d.type === 'sujet' ? 'Sujet type' : 'Document prof';
-      h += '<div class="ddoc">';
-      h += '<div class="ddoc-header" onclick="toggleDoc(' + fi + ',\'f\')">';
-      h += '<div class="ddoc-icon" style="background:' + bg + ';color:' + col + '">' + abbr + '</div>';
-      h += '<div><div class="ddoc-title">' + d.title + '</div>';
-      h += '<div class="ddoc-sub">' + label + ' \u00b7 ' + d.date + '</div></div>';
-      h += '<span class="ddoc-toggle" id="ftog' + fi + '">\u25be</span>';
-      h += '</div>';
-      h += '<div class="ddoc-content" id="fdoc' + fi + '">';
-      h += '<p class="ddoc-desc">' + d.desc + '</p>';
-      h += '<a class="pdf-btn" href="#" onclick="openPdf(event,\"' + d.pdf + '\",\"' + d.title + '\")">Ouvrir le PDF</a>';
-      h += '</div></div>';
-    }
+    fournis.forEach(function(d,i) {
+      var bg = d.type==='sujet'?'#FBF0E3':'#EBF0FA';
+      var col = d.type==='sujet'?'#7A3D10':'#1B3A6B';
+      var abbr = d.type==='sujet'?'SUJ':'DOC';
+      var label = d.type==='sujet'?'Sujet type':'Document prof';
+      h += '<div class="ddoc">' +
+        '<div class="ddoc-header" onclick="toggle(\'f'+i+'\')">' +
+          '<div class="ddoc-icon" style="background:'+bg+';color:'+col+'">'+abbr+'</div>' +
+          '<div><div class="ddoc-title">'+d.title+'</div><div class="ddoc-sub">'+label+' \u00b7 '+d.date+'</div></div>' +
+          '<span class="ddoc-toggle" id="ft'+i+'">\u25be</span>' +
+        '</div>' +
+        '<div class="ddoc-content" id="f'+i+'">' +
+          '<p class="ddoc-desc">'+d.desc+'</p>' +
+          '<a class="pdf-btn" href="#" onclick="openPdf(event,\''+d.pdf+'\',\''+d.title+'\')">Ouvrir le PDF</a>' +
+        '</div>' +
+      '</div>';
+    });
   }
 
-  // Section : Documents personnels (sport) ou Mes notes (théorique)
   var secTitle = noTabs ? 'Documents personnels' : 'Mes notes';
-  var topMargin = fournis.length > 0 ? '1.5rem' : '0';
-  h += '<div class="sec-label" style="margin-top:' + topMargin + '">' + secTitle + '</div>';
+  h += '<div class="sec-label" style="margin-top:'+(fournis.length?'1.5rem':'0')+'">'+secTitle+'</div>';
 
-  var personalDocs = noTabs ? scholar : mine;
+  var personal = noTabs ? scholar : mine;
 
-  if (personalDocs.length === 0) {
-    h += '<div class="empty-drawer">';
-    h += '<div class="empty-title">Aucun document</div>';
-    if (noTabs) {
-      h += '<div class="empty-sub">Ajoute tes ressources personnelles avec type: scholar.</div>';
-    } else {
-      h += '<div class="empty-sub">Ajoute tes CM, TD et fiches dans le tableau DOCS.</div>';
-    }
-    h += '</div>';
+  if (!personal.length) {
+    h += '<div class="empty-drawer"><div class="empty-title">Aucun document</div>';
+    h += '<div class="empty-sub">'+(noTabs?'Ajoute tes ressources avec type: scholar.':'Ajoute tes CM, TD et fiches dans le tableau DOCS.')+'</div></div>';
   } else {
-    for (var pi = 0; pi < personalDocs.length; pi++) {
-      var d = personalDocs[pi];
-      var pbg = noTabs ? '#F0EAF5' : '#EAF2EA';
-      var pcol = noTabs ? '#4A1B6B' : '#2C5F2E';
-      var pabbr = noTabs ? 'SCH' : d.type.slice(0, 2).toUpperCase();
-      h += '<div class="ddoc">';
-      h += '<div class="ddoc-header" onclick="toggleDoc(' + pi + ',\'p\')">';
-      h += '<div class="ddoc-icon" style="background:' + pbg + ';color:' + pcol + '">' + pabbr + '</div>';
-      h += '<div><div class="ddoc-title">' + d.title + '</div>';
-      h += '<div class="ddoc-sub">' + (d.date || '') + '</div></div>';
-      h += '<span class="ddoc-toggle" id="ptog' + pi + '">\u25be</span>';
-      h += '</div>';
-      h += '<div class="ddoc-content" id="pdoc' + pi + '">';
-      if (d.content) h += d.content;
-      if (d.pdf) {
-        h += '<a class="pdf-btn" href="#" onclick="openPdf(event,\"' + d.pdf + '\",\"' + d.title + '\")">Ouvrir le PDF</a>';
-      }
-      h += '</div></div>';
-    }
+    personal.forEach(function(d,i) {
+      var pbg = noTabs?'#F0EAF5':'#EAF2EA';
+      var pcol = noTabs?'#4A1B6B':'#2C5F2E';
+      var pabbr = noTabs?'SCH':d.type.slice(0,2).toUpperCase();
+      h += '<div class="ddoc">' +
+        '<div class="ddoc-header" onclick="toggle(\'p'+i+'\')">' +
+          '<div class="ddoc-icon" style="background:'+pbg+';color:'+pcol+'">'+pabbr+'</div>' +
+          '<div><div class="ddoc-title">'+d.title+'</div><div class="ddoc-sub">'+(d.date||'')+'</div></div>' +
+          '<span class="ddoc-toggle" id="pt'+i+'">\u25be</span>' +
+        '</div>' +
+        '<div class="ddoc-content" id="p'+i+'">' +
+          (d.content||'') +
+          (d.pdf?'<a class="pdf-btn" href="#" onclick="openPdf(event,\''+d.pdf+'\',\''+d.title+'\')">Ouvrir le PDF</a>':'') +
+        '</div>' +
+      '</div>';
+    });
   }
 
   document.getElementById('d-body').innerHTML = h;
 }
 
-function toggleDoc(i, prefix) {
-  var content = document.getElementById(prefix + 'doc' + i);
-  var tog = document.getElementById(prefix + 'tog' + i);
-  if (!content) return;
-  var isOpen = content.classList.toggle('open');
-  if (tog) tog.textContent = isOpen ? '\u25b4' : '\u25be';
+
+function toggle(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var isOpen = el.classList.toggle('open');
+  var prefix = id.charAt(0);
+  var num = id.slice(1);
+  var tog = document.getElementById(prefix+'t'+num);
+  if (tog) tog.textContent = isOpen ? '▴' : '▾';
 }
 
-function handlePdfClick(e) {
-  e.preventDefault();
-  e.stopPropagation();
-  var path = e.currentTarget.getAttribute('data-pdf');
-  var title = e.currentTarget.getAttribute('data-title');
-  document.getElementById('pdf-name').textContent = title;
-  document.getElementById('pdf-frame').src = path;
-  document.getElementById('pdf-modal').classList.add('open');
-}
 
 function openPdf(e, path, title) {
   e.preventDefault();
