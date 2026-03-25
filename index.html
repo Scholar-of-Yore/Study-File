@@ -103,28 +103,19 @@ nav { background: var(--surface); border-bottom: 1px solid var(--border); height
   <a class="logo" href="#">Study<em>Space</em></a>
   <ul class="nav-links">
     <li><a href="#">Accueil</a></li>
-    <li><a href="#" class="on">L2</a></li>
     <li><a href="#">L1</a></li>
+    <li><a href="#" class="on">L2</a></li>
     <li><a href="#">L3</a></li>
   </ul>
 </nav>
 
 <div class="hero">
   <div>
-    <div class="hero-eyebrow">Année universitaire 2024 – 2025</div>
+    <div class="hero-eyebrow">Année universitaire 2025 – 2026</div>
     <h1 class="hero-title">Licence 2</h1>
     <p class="hero-sub">Semestres 3 &amp; 4 — Clique sur une matière pour accéder à tes documents.</p>
   </div>
-  <div class="hero-stats">
-    <div>
-      <div class="hero-stat-val">17</div>
-      <div class="hero-stat-lbl">Matières</div>
-    </div>
-    <div>
-      <div class="hero-stat-val">2</div>
-      <div class="hero-stat-lbl">Semestres</div>
-    </div>
-  </div>
+
 </div>
 
 <div class="main">
@@ -243,7 +234,7 @@ function buildGrid(list, gridId, sem) {
       '</div>' +
       '<div class="mat-name">' + m.name + '</div>' +
       '<div class="mat-full">' + (m.sub || '') + '</div>' +
-      '<div class="mat-docs"><span class="doc-chip">CM</span><span class="doc-chip">TD</span><span class="doc-chip">Fiches</span></div>' +
+      (NO_TABS.indexOf(m.id) === -1 ? '<div class="mat-docs"><span class="doc-chip">CM</span><span class="doc-chip">TD</span><span class="doc-chip">Fiches</span></div>' : '') +
       '<div class="mat-footer">' +
         '<span class="mat-footer-count">' + (n > 0 ? n + ' document' + (n > 1 ? 's' : '') : '0 document') + '</span>' +
         '<span class="mat-open-btn">Ouvrir \u2192</span>' +
