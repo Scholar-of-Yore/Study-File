@@ -103,34 +103,26 @@ nav { background: var(--surface); border-bottom: 1px solid var(--border); height
   <a class="logo" href="#">Study<em>Space</em></a>
   <ul class="nav-links">
     <li><a href="#">Accueil</a></li>
-    <li><a href="#">L1</a></li>
-    <li><a href="#" class="on">L2</a></li>
-    <li><a href="#">L3</a></li>
+    <li><a href="#">S1</a></li>
+    <li><a href="#">S2</a></li>
+    <li><a href="S3.html">S3</a></li>
+    <li><a href="#" class="on">S4</a></li>
+    <li><a href="#">S5</a></li>
+    <li><a href="#">S6</a></li>
   </ul>
 </nav>
 
 <div class="hero">
   <div>
-    <div class="hero-eyebrow">Année universitaire 2025 – 2026</div>
-    <h1 class="hero-title">Licence 2</h1>
-    <p class="hero-sub">Semestres 3 &amp; 4 — Clique sur une matière pour accéder à tes documents.</p>
+    <div class="hero-eyebrow">Licence 2 — 2025–2026</div>
+    <h1 class="hero-title">Semestre 4</h1>
+    <p class="hero-sub">Clique sur une matière pour accéder à tes documents.</p>
   </div>
 
 </div>
 
 <div class="main">
   <div class="sem-block">
-    <div class="sem-header">
-      <h2 class="sem-title">Semestre 3</h2>
-      <span class="sem-count">10 matières</span>
-    </div>
-    <div class="mat-grid" id="grid-s3"></div>
-  </div>
-  <div class="sem-block">
-    <div class="sem-header">
-      <h2 class="sem-title">Semestre 4</h2>
-      <span class="sem-count">7 matières</span>
-    </div>
     <div class="mat-grid" id="grid-s4"></div>
   </div>
 </div>
@@ -165,19 +157,6 @@ nav { background: var(--surface); border-bottom: 1px solid var(--border); height
 </div>
 
 <script>
-var S3 = [
-  {id:'biomeca',      name:'Biomécanique',  abbr:'BM', color:'#1B3A6B', bg:'#EBF0FA'},
-  {id:'anatomie',     name:'Anatomie',       abbr:'AN', color:'#2C5F2E', bg:'#EAF2EA'},
-  {id:'physionomi',   name:'Physionomie',    abbr:'PH', color:'#6B2C52', bg:'#F5EAF0'},
-  {id:'psycho',       name:'Psychologie',    abbr:'PS', color:'#6B4F1B', bg:'#F5F0EA'},
-  {id:'neuro',        name:'Neurologie',     abbr:'NE', color:'#1B3A6B', bg:'#EBF0FA'},
-  {id:'socio',        name:'Sociologie',     abbr:'SO', color:'#2C5F2E', bg:'#EAF2EA'},
-  {id:'histoire',     name:'Histoire',       abbr:'HI', color:'#6B2C52', bg:'#F5EAF0'},
-  {id:'anglais-s3',   name:'Anglais',        abbr:'EN', color:'#1B5A5E', bg:'#EAF4F4'},
-  {id:'poly-s3',      name:'Polyvalence',    abbr:'PO', color:'#6B4F1B', bg:'#F5F0EA'},
-  {id:'spe-s3',       name:'Spécialité',     abbr:'SP', color:'#4A1B6B', bg:'#F0EAF5'}
-];
-
 var S4 = [
   {id:'fsh',          name:'FSH',            abbr:'FS', color:'#1B5A5E', bg:'#EAF4F4'},
   {id:'ims',          name:'IMS',            abbr:'IM', color:'#4A1B6B', bg:'#F0EAF5'},
@@ -246,7 +225,6 @@ function buildGrid(list, gridId, sem) {
   });
 }
 
-buildGrid(S3, 'grid-s3', 'S3');
 buildGrid(S4, 'grid-s4', 'S4');
 
 function findMat(id) {
