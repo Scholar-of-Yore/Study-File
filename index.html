@@ -4,536 +4,110 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>StudySpace — Licence 2</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  --bg: #F5F3EE;
-  --surface: #FFFFFF;
-  --surface2: #EDEAE3;
-  --border: rgba(0,0,0,0.07);
-  --border-md: rgba(0,0,0,0.12);
-  --text: #18160F;
-  --text2: #7A776E;
-  --text3: #B0ADA6;
-  --green: #2C5F2E;
-  --green-light: #EAF2EA;
-  --s3-a: #1B3A6B; --s3-b: #EBF0FA;
-  --s3-c: #2C5F2E; --s3-d: #EAF2EA;
-  --s3-e: #6B2C52; --s3-f: #F5EAF0;
-  --s3-g: #6B4F1B; --s3-h: #F5F0EA;
-  --s4-a: #1B5A5E; --s4-b: #EAF4F4;
-  --s4-c: #4A1B6B; --s4-d: #F0EAF5;
-  --s4-e: #5E3A1B; --s4-f: #F5EEE8;
-  --radius: 16px;
-  --radius-sm: 10px;
-  --shadow: 0 2px 8px rgba(0,0,0,0.05), 0 0 1px rgba(0,0,0,0.08);
-  --shadow-hover: 0 8px 32px rgba(0,0,0,0.10), 0 0 1px rgba(0,0,0,0.10);
+  --bg: #F5F3EE; --surface: #fff; --surface2: #EDEAE3;
+  --border: rgba(0,0,0,0.08); --border-md: rgba(0,0,0,0.14);
+  --text: #18160F; --text2: #7A776E; --text3: #B0ADA6;
+  --green: #2C5F2E; --green-light: #EAF2EA;
+  --radius: 14px; --radius-sm: 9px;
 }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-}
-
-/* ── NAV ── */
-nav {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 3rem;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 21px;
-  color: var(--text);
-  text-decoration: none;
-}
+nav { background: var(--surface); border-bottom: 1px solid var(--border); height: 58px; display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; }
+.logo { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--text); text-decoration: none; }
 .logo em { color: var(--green); font-style: normal; }
-
 .nav-links { display: flex; gap: 4px; list-style: none; }
-.nav-links a {
-  font-size: 13px;
-  color: var(--text2);
-  text-decoration: none;
-  padding: 6px 14px;
-  border-radius: 99px;
-  transition: all .15s;
-}
+.nav-links a { font-size: 13px; color: var(--text2); text-decoration: none; padding: 6px 14px; border-radius: 99px; transition: background .15s; }
 .nav-links a:hover { background: var(--surface2); color: var(--text); }
 .nav-links a.on { background: var(--green-light); color: var(--green); font-weight: 500; }
 
-/* ── HERO ── */
-.hero {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 3.5rem 3rem 3rem;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 2rem;
-}
+.hero { background: var(--surface); border-bottom: 1px solid var(--border); padding: 3.5rem 3rem 3rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; }
+.hero-eyebrow { font-size: 11px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: .1em; margin-bottom: .6rem; }
+.hero-title { font-family: 'Playfair Display', serif; font-size: 48px; color: var(--text); letter-spacing: -1px; line-height: 1.1; margin-bottom: .75rem; }
+.hero-sub { font-size: 15px; color: var(--text2); font-weight: 300; }
+.hero-stats { display: flex; gap: 2rem; align-items: flex-end; flex-shrink: 0; }
+.hero-stat-val { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--text); line-height: 1; text-align: right; }
+.hero-stat-lbl { font-size: 12px; color: var(--text3); margin-top: 3px; text-align: right; }
 
-.hero-left {}
-
-.hero-eyebrow {
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  margin-bottom: .6rem;
-}
-
-.hero-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 48px;
-  color: var(--text);
-  letter-spacing: -1px;
-  line-height: 1.1;
-  margin-bottom: .75rem;
-}
-
-.hero-sub {
-  font-size: 15px;
-  color: var(--text2);
-  font-weight: 300;
-}
-
-.hero-stats {
-  display: flex;
-  gap: 2rem;
-  align-items: flex-end;
-  flex-shrink: 0;
-}
-
-.hero-stat { text-align: right; }
-
-.hero-stat-val {
-  font-family: 'Playfair Display', serif;
-  font-size: 36px;
-  color: var(--text);
-  line-height: 1;
-}
-
-.hero-stat-lbl {
-  font-size: 12px;
-  color: var(--text3);
-  margin-top: 3px;
-}
-
-/* ── MAIN ── */
 .main { max-width: 980px; margin: 0 auto; padding: 3rem 2rem 6rem; }
-
-/* ── SEM HEADER ── */
-.sem-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
-}
-
-.sem-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 26px;
-  color: var(--text);
-}
-
-.sem-count {
-  font-size: 13px;
-  color: var(--text3);
-}
-
+.sem-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.5rem; }
+.sem-title { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--text); }
+.sem-count { font-size: 13px; color: var(--text3); }
 .sem-block { margin-bottom: 4rem; }
+.mat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 
-/* ── MATIERE CARDS GRID ── */
-.mat-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-}
-
-/* ── MATIERE CARD ── */
-.mat-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  cursor: pointer;
-  transition: all .2s;
-  box-shadow: var(--shadow);
-  position: relative;
-  overflow: hidden;
-}
-
-.mat-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: currentColor;
-  opacity: .15;
-}
-
-.mat-card:hover {
-  box-shadow: var(--shadow-hover);
-  transform: translateY(-2px);
-  border-color: var(--border-md);
-}
-
-.mat-card-top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 1.25rem;
-}
-
-.mat-icon {
-  width: 42px; height: 42px;
-  border-radius: var(--radius-sm);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .04em;
-  flex-shrink: 0;
-  color: currentColor;
-  opacity: .85;
-}
-
-.mat-badge {
-  font-size: 10px;
-  font-weight: 500;
-  padding: 3px 8px;
-  border-radius: 99px;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-}
-
-.mat-name {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: 4px;
-  line-height: 1.3;
-}
-
-.mat-full {
-  font-size: 12px;
-  color: var(--text3);
-  margin-bottom: 1.25rem;
-}
-
-.mat-docs {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.doc-chip {
-  font-size: 11px;
-  padding: 3px 9px;
-  border-radius: 99px;
-  border: 1px solid var(--border-md);
-  color: var(--text2);
-  background: var(--bg);
-  cursor: pointer;
-  transition: all .12s;
-  text-decoration: none;
-}
-
-.doc-chip:hover {
-  background: var(--surface2);
-  color: var(--text);
-}
-
-.mat-footer {
-  margin-top: 1.25rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
+.mat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; cursor: pointer; transition: box-shadow .2s, transform .2s, border-color .2s; position: relative; overflow: hidden; user-select: none; }
+.mat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: currentColor; opacity: .18; }
+.mat-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,.10); transform: translateY(-2px); border-color: var(--border-md); }
+.mat-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.25rem; }
+.mat-icon { width: 42px; height: 42px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+.mat-badge { font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 99px; text-transform: uppercase; }
+.mat-name { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.mat-full { font-size: 12px; color: var(--text3); margin-bottom: 1.25rem; }
+.mat-docs { display: flex; gap: 6px; flex-wrap: wrap; }
+.doc-chip { font-size: 11px; padding: 3px 9px; border-radius: 99px; border: 1px solid var(--border-md); color: var(--text2); background: var(--bg); }
+.mat-footer { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
 .mat-footer-count { font-size: 12px; color: var(--text3); }
-.mat-open-btn {
-  font-size: 12px;
-  color: var(--text2);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  transition: color .15s;
-}
-.mat-open-btn:hover { color: var(--text); }
+.mat-open-btn { font-size: 12px; color: var(--text2); }
 
-/* ── DRAWER (panneau latéral) ── */
-.drawer-overlay {
-  display: none;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(18,16,10,.4);
-  z-index: 200;
-}
-.drawer-overlay.open { display: block; }
+#overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(18,16,10,.45); z-index: 200; }
+#overlay.open { display: block; }
 
-.drawer {
-  position: fixed;
-  top: 0; right: -560px;
-  width: 520px;
-  bottom: 0;
-  background: var(--surface);
-  box-shadow: -8px 0 40px rgba(0,0,0,.15);
-  z-index: 201;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transition: right .3s cubic-bezier(.4,0,.2,1);
-}
-.drawer.open { right: 0; }
+#drawer { position: fixed; top: 0; right: 0; width: 520px; max-width: 92vw; height: 100%; background: var(--surface); z-index: 300; display: flex; flex-direction: column; overflow: hidden; transform: translateX(100%); transition: transform .28s ease; box-shadow: -4px 0 32px rgba(0,0,0,.12); }
+#drawer.open { transform: translateX(0); }
 
-.drawer-header {
-  padding: 1.75rem 2rem 1.25rem;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-shrink: 0;
-}
-
-.drawer-close {
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  background: var(--surface2);
-  border: none; cursor: pointer;
-  font-size: 16px; color: var(--text2);
-  display: flex; align-items: center; justify-content: center;
-  transition: all .15s; flex-shrink: 0;
-}
-.drawer-close:hover { background: var(--border-md); color: var(--text); }
-
+.drawer-header { padding: 1.75rem 1.75rem 1.25rem; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-shrink: 0; }
 .drawer-eyebrow { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 5px; }
-.drawer-title { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--text); }
+.drawer-title { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--text); }
+.drawer-close { width: 32px; height: 32px; border-radius: 50%; background: var(--surface2); border: none; cursor: pointer; font-size: 16px; color: var(--text2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.drawer-close:hover { background: var(--border-md); }
 
-.drawer-tabs {
-  display: flex;
-  gap: 2px;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
-}
-
-.d-tab {
-  flex: 1; text-align: center;
-  padding: 7px 8px; font-size: 13px;
-  border-radius: var(--radius-sm);
-  cursor: pointer; border: none;
-  background: none; color: var(--text2);
-  font-family: 'DM Sans', sans-serif;
-  transition: all .15s;
-}
+.drawer-tabs { display: flex; gap: 2px; padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+.d-tab { flex: 1; text-align: center; padding: 7px; font-size: 13px; border-radius: var(--radius-sm); cursor: pointer; border: none; background: none; color: var(--text2); font-family: 'DM Sans', sans-serif; }
 .d-tab.on { background: var(--bg); color: var(--text); font-weight: 500; }
 
-.drawer-body { flex: 1; overflow-y: auto; padding: 1.5rem 2rem; }
+.drawer-body { flex: 1; overflow-y: auto; padding: 1.5rem 1.75rem; }
 
-/* DOC ITEMS IN DRAWER */
-.ddoc {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  margin-bottom: 10px;
-  overflow: hidden;
-  transition: box-shadow .15s;
-}
-.ddoc:hover { box-shadow: var(--shadow); }
-
-.ddoc-header {
-  display: flex; align-items: center; gap: 12px;
-  padding: .9rem 1.1rem;
-  cursor: pointer;
-}
-
-.ddoc-icon {
-  width: 34px; height: 34px;
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 10px; font-weight: 600; letter-spacing: .04em;
-  flex-shrink: 0;
-  color: var(--text2);
-}
-
-.ddoc-info { flex: 1; min-width: 0; }
+.sec-label { font-size: 11px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: .08em; margin-bottom: .75rem; padding-bottom: .6rem; border-bottom: 1px solid var(--border); }
+.ddoc { border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 10px; overflow: hidden; }
+.ddoc-header { display: flex; align-items: center; gap: 12px; padding: .9rem 1.1rem; cursor: pointer; }
+.ddoc-header:hover { background: var(--bg); }
+.ddoc-icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
 .ddoc-title { font-size: 14px; font-weight: 500; color: var(--text); }
 .ddoc-sub { font-size: 12px; color: var(--text3); margin-top: 1px; }
-
-.ddoc-toggle { font-size: 11px; color: var(--text3); flex-shrink: 0; }
-
-.ddoc-content {
-  border-top: 1px solid var(--border);
-  padding: 1.25rem;
-  font-size: 14px;
-  color: var(--text2);
-  line-height: 1.75;
-  display: none;
-  background: var(--bg);
-}
-
+.ddoc-toggle { margin-left: auto; font-size: 11px; color: var(--text3); }
+.ddoc-content { border-top: 1px solid var(--border); padding: 1.1rem 1.25rem; background: var(--bg); display: none; }
 .ddoc-content.open { display: block; }
+.ddoc-desc { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 1rem; }
+.pdf-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--border-md); border-radius: 8px; padding: 8px 14px; font-size: 13px; font-weight: 500; color: var(--text); cursor: pointer; text-decoration: none; }
+.pdf-btn:hover { box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.empty-drawer { text-align: center; padding: 2rem .5rem; }
+.empty-title { font-size: 14px; font-weight: 500; color: var(--text2); margin-bottom: 4px; }
+.empty-sub { font-size: 13px; color: var(--text3); }
 
-.ddoc-content h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 17px; color: var(--text);
-  margin-bottom: .6rem;
-}
+#pdf-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10,8,4,.7); z-index: 500; padding: 4vh 5vw; }
+#pdf-modal.open { display: block; }
+.pdf-modal-inner { background: #fff; border-radius: 12px; overflow: hidden; width: 100%; height: 100%; display: flex; flex-direction: column; }
+.pdf-modal-bar { display: flex; align-items: center; justify-content: space-between; padding: .75rem 1.25rem; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+.pdf-modal-name { font-size: 14px; font-weight: 500; color: var(--text); }
+.pdf-modal-close { background: var(--surface2); border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 14px; color: var(--text2); }
+.pdf-modal-close:hover { background: var(--border-md); }
+#pdf-frame { flex: 1; border: none; width: 100%; height: 100%; }
 
-.ddoc-content ul { padding-left: 1.25rem; line-height: 2; }
-
-.ddoc-content .pdf-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--surface);
-  border: 1px solid var(--border-md);
-  border-radius: 8px;
-  padding: 8px 14px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text);
-  text-decoration: none;
-  transition: all .15s;
-}
-.ddoc-content .pdf-link:hover { box-shadow: var(--shadow); }
-
-.empty-drawer {
-  text-align: center;
-  padding: 3rem 1rem;
-  color: var(--text3);
-}
-.empty-drawer-icon { font-size: 32px; margin-bottom: .75rem; }
-.empty-drawer-title { font-size: 14px; font-weight: 500; color: var(--text2); margin-bottom: 4px; }
-.empty-drawer-sub { font-size: 13px; }
-
-/* SCROLLBAR */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-thumb { background: var(--border-md); border-radius: 99px; }
 
 @media (max-width: 720px) {
-  .hero { flex-direction: column; padding: 2rem 1.5rem; }
-  .hero-stats { align-self: flex-start; gap: 1.5rem; }
-  .hero-stat { text-align: left; }
-  .mat-grid { grid-template-columns: 1fr 1fr; }
   nav { padding: 0 1.25rem; }
+  .hero { flex-direction: column; padding: 2rem 1.5rem; }
   .main { padding: 2rem 1.25rem 4rem; }
-  .drawer { width: 100%; }
+  .mat-grid { grid-template-columns: 1fr 1fr; }
+  #drawer { width: 100%; max-width: 100%; }
 }
-
-@media (max-width: 480px) {
-  .mat-grid { grid-template-columns: 1fr; }
-}
-
-/* PDF MODAL */
-.pdf-modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(10,8,4,.6);
-  z-index: 500;
-  align-items: center;
-  justify-content: center;
-  padding: 3vh 4vw;
-}
-.pdf-modal-overlay.open { display: flex; }
-.pdf-modal {
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 24px 80px rgba(0,0,0,.3);
-}
-.pdf-modal-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: .75rem 1.25rem;
-  border-bottom: 1px solid rgba(0,0,0,.08);
-  background: #fff;
-  flex-shrink: 0;
-}
-.pdf-modal-title {
-  font-size: 14px;
-  font-weight: 500;
-  color: #18160F;
-}
-.pdf-modal-close {
-  width: 30px; height: 30px;
-  border-radius: 50%;
-  background: #F0EDE7;
-  border: none;
-  cursor: pointer;
-  font-size: 15px;
-  color: #7A776E;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.pdf-modal-close:hover { background: #E0DDD6; }
-.pdf-modal iframe {
-  flex: 1;
-  border: none;
-  width: 100%;
-}
-
-
-.pdf-modal-overlay {
-  display: none;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(10,8,4,.65);
-  z-index: 500;
-  padding: 4vh 6vw;
-}
-.pdf-modal-overlay.open { display: block; }
-.pdf-modal {
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 24px 80px rgba(0,0,0,.35);
-}
-.pdf-modal-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: .75rem 1.25rem;
-  border-bottom: 1px solid rgba(0,0,0,.08);
-  flex-shrink: 0;
-}
-.pdf-modal-title { font-size: 14px; font-weight: 500; color: #18160F; }
-.pdf-modal-close {
-  width: 30px; height: 30px; border-radius: 50%;
-  background: #F0EDE7; border: none; cursor: pointer;
-  font-size: 15px; color: #7A776E;
-  display: flex; align-items: center; justify-content: center;
-}
-.pdf-modal-close:hover { background: #E0DDD6; }
-.pdf-modal iframe { flex: 1; border: none; width: 100%; }
+@media (max-width: 480px) { .mat-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -548,450 +122,153 @@ nav {
   </ul>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-left">
+  <div>
     <div class="hero-eyebrow">Année universitaire 2024 – 2025</div>
     <h1 class="hero-title">Licence 2</h1>
-    <p class="hero-sub">Semestres 3 & 4 — Clique sur une matière pour accéder à tes documents.</p>
+    <p class="hero-sub">Semestres 3 &amp; 4 — Clique sur une matière pour accéder à tes documents.</p>
   </div>
   <div class="hero-stats">
-    <div class="hero-stat">
-      <div class="hero-stat-val">16</div>
+    <div>
+      <div class="hero-stat-val">17</div>
       <div class="hero-stat-lbl">Matières</div>
     </div>
-    <div class="hero-stat">
+    <div>
       <div class="hero-stat-val">2</div>
       <div class="hero-stat-lbl">Semestres</div>
     </div>
   </div>
 </div>
 
-<!-- MAIN -->
 <div class="main">
-
-  <!-- SEMESTRE 3 -->
   <div class="sem-block">
     <div class="sem-header">
       <h2 class="sem-title">Semestre 3</h2>
       <span class="sem-count">10 matières</span>
     </div>
-    <div class="mat-grid">
-
-      <div class="mat-card" onclick="openDrawer('biomeca')" style="color:#1B3A6B;">
-        <div class="mat-card-top">
-          <div class="mat-icon" style="background:#EBF0FA;">BM</div>
-          <span class="mat-badge" style="background:#EBF0FA;color:#1B3A6B;">S3</span>
-        </div>
-        <div class="mat-name">Biomécanique</div>
-        <div class="mat-full">BIOMECA</div>
-        <div class="mat-docs">
-          <span class="doc-chip">CM</span>
-          <span class="doc-chip">TD</span>
-          <span class="doc-chip">Fiches</span>
-        </div>
-        <div class="mat-footer">
-          <span class="mat-footer-count">0 document</span>
-          <span class="mat-open-btn">Ouvrir →</span>
-        </div>
-      </div>
-
-      <div class="mat-card" onclick="openDrawer('anatomie')" style="color:#2C5F2E;">
-        <div class="mat-card-top">
-          <div class="mat-icon" style="background:#EAF2EA;">AN</div>
-          <span class="mat-badge" style="background:#EAF2EA;color:#2C5F2E;">S3</span>
-        </div>
-        <div class="mat-name">Anatomie</div>
-        <div class="mat-full">ANATOMIE</div>
-        <div class="mat-docs">
-          <span class="doc-chip">CM</span>
-          <span class="doc-chip">TD</span>
-          <span class="doc-chip">Fiches</span>
-        </div>
-        <div class="mat-footer">
-          <span class="mat-footer-count">0 document</span>
-          <span class="mat-open-btn">Ouvrir →</span>
-        </div>
-      </div>
-
-      <div class="mat-card" onclick="openDrawer('physionomi')" style="color:#6B2C52;">
-        <div class="mat-card-top">
-          <div class="mat-icon" style="background:#F5EAF0;">PH</div>
-          <span class="mat-badge" style="background:#F5EAF0;color:#6B2C52;">S3</span>
-        </div>
-        <div class="mat-name">Physionomie</div>
-        <div class="mat-full">PHYSIONOMI</div>
-        <div class="mat-docs">
-          <span class="doc-chip">CM</span>
-          <span class="doc-chip">TD</span>
-          <span class="doc-chip">Fiches</span>
-        </div>
-        <div class="mat-footer">
-          <span class="mat-footer-count">0 document</span>
-          <span class="mat-open-btn">Ouvrir →</span>
-        </div>
-      </div>
-
-      <div class="mat-card" onclick="openDrawer('psycho')" style="color:#6B4F1B;">
-        <div class="mat-card-top">
-          <div class="mat-icon" style="background:#F5F0EA;">PS</div>
-          <span class="mat-badge" style="background:#F5F0EA;color:#6B4F1B;">S3</span>
-        </div>
-        <div class="mat-name">Psychologie</div>
-        <div class="mat-full">PSYCHO</div>
-        <div class="mat-docs">
-          <span class="doc-chip">CM</span>
-          <span class="doc-chip">TD</span>
-          <span class="doc-chip">Fiches</span>
-        </div>
-        <div class="mat-footer">
-          <span class="mat-footer-count">0 document</span>
-          <span class="mat-open-btn">Ouvrir →</span>
-        </div>
-      </div>
-
-      <div class="mat-card" onclick="openDrawer('neuro')" style="color:#1B3A6B;">
-        <div class="mat-card-top">
-          <div class="mat-icon" style="background:#EBF0FA;">NE</div>
-          <span class="mat-badge" style="background:#EBF0FA;color:#1B3A6B;">S3</span>
-        </div>
-        <div class="mat-name">Neurologie</div>
-        <div class="mat-full">NEURO</div>
-        <div class="mat-docs">
-          <span class="doc-chip">CM</span>
-          <span class="doc-chip">TD</span>
-          <span class="doc-chip">Fiches</span>
-        </div>
-        <div class="mat-footer">
-          <span class="mat-footer-count">0 document</span>
-          <span class="mat-open-btn">Ouvrir →</span>
-        </div>
-      </div>
-
-      <div class="mat-card" onclick="openDrawer('socio')" style="color:#2C5F2E;">
-        <div class="mat-card-top">
-          <div class="mat-icon" style="background:#EAF2EA;">SO</div>
-          <span class="mat-badge" style="background:#EAF2EA;color:#2C5F2E;">S3</span>
-        </div>
-        <div class="mat-name">Sociologie</div>
-        <div class="mat-full">SOCIO</div>
-        <div class="mat-docs">
-          <span class="doc-chip">CM</span>
-          <span class="doc-chip">TD</span>
-          <span class="doc-chip">Fiches</span>
-        </div>
-        <div class="mat-footer">
-          <span class="mat-footer-count">0 document</span>
-          <span class="mat-open-btn">Ouvrir →</span>
-        </div>
-      </div>
-
-      <div class="mat-card" onclick="openDrawer('histoire')" style="color:#6B2C52;">
-        <div class="mat-card-top">
-          <div class="mat-icon" style="background:#F5EAF0;">HI</div>
-          <span class="mat-badge" style="background:#F5EAF0;color:#6B2C52;">S3</span>
-        </div>
-        <div class="mat-name">Histoire</div>
-        <div class="mat-full">HISTOIRE</div>
-        <div class="mat-docs">
-          <span class="doc-chip">CM</span>
-          <span class="doc-chip">TD</span>
-          <span class="doc-chip">Fiches</span>
-        </div>
-        <div class="mat-footer">
-          <span class="mat-footer-count">0 document</span>
-          <span class="mat-open-btn">Ouvrir →</span>
-        </div>
-      </div>
-
-      <div class="mat-card" onclick="openDrawer('anglais-s3')" style="color:#1B5A5E;">
-        <div class="mat-card-top">
-          <div class="mat-icon" style="background:#EAF4F4;">EN</div>
-          <span class="mat-badge" style="background:#EAF4F4;color:#1B5A5E;">S3</span>
-        </div>
-        <div class="mat-name">Anglais</div>
-        <div class="mat-full">ANGLAIS</div>
-        <div class="mat-docs">
-          <span class="doc-chip">CM</span>
-          <span class="doc-chip">TD</span>
-          <span class="doc-chip">Fiches</span>
-        </div>
-        <div class="mat-footer">
-          <span class="mat-footer-count">0 document</span>
-          <span class="mat-open-btn">Ouvrir →</span>
-        </div>
-      </div>
-
-      <div class="mat-card" onclick="openDrawer('polyvalence-s3')" style="color:#6B4F1B;">
-        <div class="mat-card-top">
-          <div class="mat-icon" style="background:#F5F0EA;">PO</div>
-          <span class="mat-badge" style="background:#F5F0EA;color:#6B4F1B;">S3</span>
-        </div>
-        <div class="mat-name">Polyvalence</div>
-        <div class="mat-full">POLYVALENCE</div>
-        <div class="mat-docs">
-          <span class="doc-chip">CM</span>
-          <span class="doc-chip">TD</span>
-          <span class="doc-chip">Fiches</span>
-        </div>
-        <div class="mat-footer">
-          <span class="mat-footer-count">0 document</span>
-          <span class="mat-open-btn">Ouvrir →</span>
-        </div>
-      </div>
-
-      <div class="mat-card" onclick="openDrawer('specialite-s3')" style="color:#4A1B6B;">
-        <div class="mat-card-top">
-          <div class="mat-icon" style="background:#F0EAF5;">SP</div>
-          <span class="mat-badge" style="background:#F0EAF5;color:#4A1B6B;">S3</span>
-        </div>
-        <div class="mat-name">Spécialité</div>
-        <div class="mat-full">SPÉCIALITÉ</div>
-        <div class="mat-docs">
-          <span class="doc-chip">CM</span>
-          <span class="doc-chip">TD</span>
-          <span class="doc-chip">Fiches</span>
-        </div>
-        <div class="mat-footer">
-          <span class="mat-footer-count">0 document</span>
-          <span class="mat-open-btn">Ouvrir →</span>
-        </div>
-      </div>
-
-    </div>
+    <div class="mat-grid" id="grid-s3"></div>
   </div>
-
-  <!-- SEMESTRE 4 -->
   <div class="sem-block">
     <div class="sem-header">
       <h2 class="sem-title">Semestre 4</h2>
       <span class="sem-count">7 matières</span>
     </div>
-    <div class="mat-grid">
-
-      <div class="mat-card" onclick="openDrawer('fsh')" style="color:#1B5A5E;">
-        <div class="mat-card-top">
-          <div class="mat-icon" style="background:#EAF4F4;">FS</div>
-          <span class="mat-badge" style="background:#EAF4F4;color:#1B5A5E;">S4</span>
-        </div>
-        <div class="mat-name">FSH</div>
-        <div class="mat-full">Fonctions Supérieures Humaines</div>
-        <div class="mat-docs">
-          <span class="doc-chip">CM</span>
-          <span class="doc-chip">TD</span>
-          <span class="doc-chip">Fiches</span>
-        </div>
-        <div class="mat-footer">
-          <span class="mat-footer-count">0 document</span>
-          <span class="mat-open-btn">Ouvrir →</span>
-        </div>
-      </div>
-
-      <div class="mat-card" onclick="openDrawer('ims')" style="color:#4A1B6B;">
-        <div class="mat-card-top">
-          <div class="mat-icon" style="background:#F0EAF5;">IM</div>
-          <span class="mat-badge" style="background:#F0EAF5;color:#4A1B6B;">S4</span>
-        </div>
-        <div class="mat-name">IMS</div>
-        <div class="mat-full">Ingénierie & Méthodes Sportives</div>
-        <div class="mat-docs">
-          <span class="doc-chip">CM</span>
-          <span class="doc-chip">TD</span>
-          <span class="doc-chip">Fiches</span>
-        </div>
-        <div class="mat-footer">
-          <span class="mat-footer-count">0 document</span>
-          <span class="mat-open-btn">Ouvrir →</span>
-        </div>
-      </div>
-
-      <div class="mat-card" onclick="openDrawer('sante-eps')" style="color:#2C5F2E;">
-        <div class="mat-card-top">
-          <div class="mat-icon" style="background:#EAF2EA;">SA</div>
-          <span class="mat-badge" style="background:#EAF2EA;color:#2C5F2E;">S4</span>
-        </div>
-        <div class="mat-name">Santé EPS</div>
-        <div class="mat-full">SANTÉ EPS</div>
-        <div class="mat-docs">
-          <span class="doc-chip">CM</span>
-          <span class="doc-chip">TD</span>
-          <span class="doc-chip">Fiches</span>
-        </div>
-        <div class="mat-footer">
-          <span class="mat-footer-count">0 document</span>
-          <span class="mat-open-btn">Ouvrir →</span>
-        </div>
-      </div>
-
-      <div class="mat-card" onclick="openDrawer('anglais-s4')" style="color:#5E3A1B;">
-        <div class="mat-card-top">
-          <div class="mat-icon" style="background:#F5EEE8;">EN</div>
-          <span class="mat-badge" style="background:#F5EEE8;color:#5E3A1B;">S4</span>
-        </div>
-        <div class="mat-name">Anglais</div>
-        <div class="mat-full">ANGLAIS</div>
-        <div class="mat-docs">
-          <span class="doc-chip">CM</span>
-          <span class="doc-chip">TD</span>
-          <span class="doc-chip">Fiches</span>
-        </div>
-        <div class="mat-footer">
-          <span class="mat-footer-count">0 document</span>
-          <span class="mat-open-btn">Ouvrir →</span>
-        </div>
-      </div>
-
-      <div class="mat-card" onclick="openDrawer('basket')" style="color:#1B3A6B;">
-        <div class="mat-card-top">
-          <div class="mat-icon" style="background:#EBF0FA;">P1</div>
-          <span class="mat-badge" style="background:#EBF0FA;color:#1B3A6B;">S4</span>
-        </div>
-        <div class="mat-name">Polyvalence 1</div>
-        <div class="mat-full">Basketball</div>
-        <div class="mat-docs">
-          <span class="doc-chip">CM</span>
-          <span class="doc-chip">TD</span>
-          <span class="doc-chip">Fiches</span>
-        </div>
-        <div class="mat-footer">
-          <span class="mat-footer-count" id="count-basket">3 documents</span>
-          <span class="mat-open-btn">Ouvrir →</span>
-        </div>
-      </div>
-
-      <div class="mat-card" onclick="openDrawer('orientation')" style="color:#2C5F2E;">
-        <div class="mat-card-top">
-          <div class="mat-icon" style="background:#EAF2EA;">P2</div>
-          <span class="mat-badge" style="background:#EAF2EA;color:#2C5F2E;">S4</span>
-        </div>
-        <div class="mat-name">Polyvalence 2</div>
-        <div class="mat-full">Course d'orientation</div>
-        <div class="mat-docs">
-          <span class="doc-chip">CM</span>
-          <span class="doc-chip">TD</span>
-          <span class="doc-chip">Fiches</span>
-        </div>
-        <div class="mat-footer">
-          <span class="mat-footer-count">0 document</span>
-          <span class="mat-open-btn">Ouvrir →</span>
-        </div>
-      </div>
-
-      <div class="mat-card" onclick="openDrawer('specialite-s4')" style="color:#6B2C52;">
-        <div class="mat-card-top">
-          <div class="mat-icon" style="background:#F5EAF0;">JD</div>
-          <span class="mat-badge" style="background:#F5EAF0;color:#6B2C52;">S4</span>
-        </div>
-        <div class="mat-name">Spécialité</div>
-        <div class="mat-full">Judo</div>
-        <div class="mat-docs">
-          <span class="doc-chip">CM</span>
-          <span class="doc-chip">TD</span>
-          <span class="doc-chip">Fiches</span>
-        </div>
-        <div class="mat-footer">
-          <span class="mat-footer-count">0 document</span>
-          <span class="mat-open-btn">Ouvrir →</span>
-        </div>
-      </div>
-
-    </div>
+    <div class="mat-grid" id="grid-s4"></div>
   </div>
 </div>
 
-<!-- DRAWER -->
-<div class="drawer-overlay" id="overlay" onclick="closeDrawer()"></div>
-<div class="drawer" id="drawer">
+<div id="overlay" onclick="closeDrawer()"></div>
+
+<div id="drawer">
   <div class="drawer-header">
     <div>
-      <div class="drawer-eyebrow" id="d-eyebrow">L2 · Semestre 3</div>
-      <div class="drawer-title" id="d-title">Biomécanique</div>
+      <div class="drawer-eyebrow" id="d-eyebrow"></div>
+      <div class="drawer-title" id="d-title"></div>
     </div>
-    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+    <button class="drawer-close" onclick="closeDrawer()">&#x2715;</button>
   </div>
-  <div class="drawer-tabs" id="drawer-tabs">
-    <button class="d-tab on" onclick="setDTab('all',this)">Tous</button>
-    <button class="d-tab" onclick="setDTab('cm',this)">CM</button>
-    <button class="d-tab" onclick="setDTab('td',this)">TD</button>
-    <button class="d-tab" onclick="setDTab('fiche',this)">Fiches</button>
+  <div class="drawer-tabs">
+    <button class="d-tab on" onclick="setTab('all',this)">Tous</button>
+    <button class="d-tab" onclick="setTab('cm',this)">CM</button>
+    <button class="d-tab" onclick="setTab('td',this)">TD</button>
+    <button class="d-tab" onclick="setTab('fiche',this)">Fiches</button>
   </div>
-  <div class="drawer-body" id="d-body">
-    <div class="empty-drawer">
-      <div class="empty-drawer-title">Aucun document pour l'instant</div>
-      <div class="empty-drawer-sub">Ajoute tes cours, TD et fiches en éditant le fichier HTML.</div>
+  <div class="drawer-body" id="d-body"></div>
+</div>
+
+<div id="pdf-modal" onclick="handlePdfBg(event)">
+  <div class="pdf-modal-inner">
+    <div class="pdf-modal-bar">
+      <span class="pdf-modal-name" id="pdf-name">Document</span>
+      <button class="pdf-modal-close" onclick="closePdf()">&#x2715;</button>
     </div>
+    <iframe id="pdf-frame" src=""></iframe>
   </div>
 </div>
 
 <script>
+var S3 = [
+  {id:'biomeca',        name:'Biomécanique',  abbr:'BM', color:'#1B3A6B', bg:'#EBF0FA'},
+  {id:'anatomie',       name:'Anatomie',       abbr:'AN', color:'#2C5F2E', bg:'#EAF2EA'},
+  {id:'physionomi',     name:'Physionomie',    abbr:'PH', color:'#6B2C52', bg:'#F5EAF0'},
+  {id:'psycho',         name:'Psychologie',    abbr:'PS', color:'#6B4F1B', bg:'#F5F0EA'},
+  {id:'neuro',          name:'Neurologie',     abbr:'NE', color:'#1B3A6B', bg:'#EBF0FA'},
+  {id:'socio',          name:'Sociologie',     abbr:'SO', color:'#2C5F2E', bg:'#EAF2EA'},
+  {id:'histoire',       name:'Histoire',       abbr:'HI', color:'#6B2C52', bg:'#F5EAF0'},
+  {id:'anglais-s3',     name:'Anglais',        abbr:'EN', color:'#1B5A5E', bg:'#EAF4F4'},
+  {id:'poly-s3',        name:'Polyvalence',    abbr:'PO', color:'#6B4F1B', bg:'#F5F0EA'},
+  {id:'spe-s3',         name:'Spécialité',     abbr:'SP', color:'#4A1B6B', bg:'#F0EAF5'}
+];
 
+var S4 = [
+  {id:'fsh',            name:'FSH',            abbr:'FS', color:'#1B5A5E', bg:'#EAF4F4'},
+  {id:'ims',            name:'IMS',            abbr:'IM', color:'#4A1B6B', bg:'#F0EAF5'},
+  {id:'sante-eps',      name:'Santé EPS',      abbr:'SA', color:'#2C5F2E', bg:'#EAF2EA'},
+  {id:'anglais-s4',     name:'Anglais',        abbr:'EN', color:'#5E3A1B', bg:'#F5EEE8'},
+  {id:'basket',         name:'Polyvalence 1',  abbr:'P1', color:'#1B3A6B', bg:'#EBF0FA', sub:'Basketball'},
+  {id:'orientation',    name:'Polyvalence 2',  abbr:'P2', color:'#2C5F2E', bg:'#EAF2EA', sub:"Course d'orientation"},
+  {id:'spe-s4',         name:'Spécialité',     abbr:'JD', color:'#6B2C52', bg:'#F5EAF0', sub:'Judo'}
+];
 
-const MATIERES = {
-  biomeca:        { name:'Biomécanique',  sem:'S3', color:'#1B3A6B', bg:'#EBF0FA' },
-  anatomie:       { name:'Anatomie',      sem:'S3', color:'#2C5F2E', bg:'#EAF2EA' },
-  physionomi:     { name:'Physionomie',   sem:'S3', color:'#6B2C52', bg:'#F5EAF0' },
-  psycho:         { name:'Psychologie',   sem:'S3', color:'#6B4F1B', bg:'#F5F0EA' },
-  neuro:          { name:'Neurologie',    sem:'S3', color:'#1B3A6B', bg:'#EBF0FA' },
-  socio:          { name:'Sociologie',    sem:'S3', color:'#2C5F2E', bg:'#EAF2EA' },
-  histoire:       { name:'Histoire',      sem:'S3', color:'#6B2C52', bg:'#F5EAF0' },
-  'anglais-s3':   { name:'Anglais',       sem:'S3', color:'#1B5A5E', bg:'#EAF4F4' },
-  'polyvalence-s3':{ name:'Polyvalence',  sem:'S3', color:'#6B4F1B', bg:'#F5F0EA' },
-  'specialite-s3':{ name:'Spécialité',    sem:'S3', color:'#4A1B6B', bg:'#F0EAF5' },
-  fsh:            { name:'FSH',           sem:'S4', color:'#1B5A5E', bg:'#EAF4F4' },
-  ims:            { name:'IMS',           sem:'S4', color:'#4A1B6B', bg:'#F0EAF5' },
-  'sante-eps':    { name:'Santé EPS',     sem:'S4', color:'#2C5F2E', bg:'#EAF2EA' },
-  'anglais-s4':   { name:'Anglais',       sem:'S4', color:'#5E3A1B', bg:'#F5EEE8' },
-  basket:          { name:'Polyvalence 1 — Basketball',      sem:'S4', color:'#1B3A6B', bg:'#EBF0FA' },
-  orientation:     { name:'Polyvalence 2 — Course d\'orientation', sem:'S4', color:'#2C5F2E', bg:'#EAF2EA' },
-  'specialite-s4':{ name:'Spécialité — Judo',  sem:'S4', color:'#6B2C52', bg:'#F5EAF0' },
-};
-
-// ── DONNÉES DOCUMENTS ──────────────────────────────────────────
-// Pour ajouter tes vrais documents, ajoute des entrées ici.
-// type : 'cm' | 'td' | 'fiche'
-// content : texte affiché directement sur la page
-// pdf : chemin vers le PDF (ex: 'docs/mon-cours.pdf')
-const DOCS = {
+var DOCS = {
   basket: [
-    {
-      type: 'fourni',
-      title: 'Connaissances de base',
-      date: 'W. Barrière — 2025-2026',
-      desc: 'Présentation générale de l'activité : références culturelles, essence du basketball, terrain, règlement, violations, fautes et arbitrage.',
-      pdf: 'docs/basket/Basket_connaissance_de_base.pdf'
-    },
-    {
-      type: 'fourni',
-      title: 'Apports théoriques',
-      date: 'W. Barrière — 2025-2026',
-      desc: 'Document complet : règlement détaillé, formes de pratiques sociales, connaissances tactiques et techniques (attaque, défense, tir, passe, dribble).',
-      pdf: 'docs/basket/Basket_apports_theoriques.pdf'
-    },
-    {
-      type: 'sujet',
-      title: 'Sujet type — Partiel (semestre précédent)',
-      date: 'W. Barrière — 2025-2026',
-      desc: '20 questions possibles à l'examen : activité paradoxale, infractions, terrain, règles d'espace/temps/manipulation, fautes, tactiques (passe et va, back-door, drive, démarquage, défense...).',
-      pdf: 'docs/basket/Basket_SUJET_TYPE.pdf'
-    }
+    {type:'fourni', title:'Connaissances de base', date:'W. Barrière — 2025-2026',
+     desc:"Références culturelles, essence du basketball, terrain, règlement, violations, fautes et arbitrage.",
+     pdf:'docs/basket/Basket_connaissance_de_base.pdf'},
+    {type:'fourni', title:'Apports théoriques', date:'W. Barrière — 2025-2026',
+     desc:"Règlement détaillé, formes de pratiques sociales, connaissances tactiques et techniques.",
+     pdf:'docs/basket/Basket_apports_theoriques.pdf'},
+    {type:'sujet', title:'Sujet type — Partiel', date:'W. Barrière — 2025-2026',
+     desc:"20 questions possibles à l'examen : règles, terrain, violations, fautes, tactiques.",
+     pdf:'docs/basket/Basket_SUJET_TYPE.pdf'}
   ]
-  // Ajoute d'autres matières ici de la même façon.
 };
 
-const TYPE_LABEL = { cm:'Cours CM', td:'TD', fiche:'Fiche résumé' };
-const TYPE_ICON  = { cm:'CM', td:'TD', fiche:'F' };
-const TYPE_BG    = { cm:'#EAF2EA', td:'#EBF0FA', fiche:'#FBF0E3' };
+var curMat = null;
+var curTab = 'all';
 
-let curMat = null;
-let curTab = 'all';
+function buildGrid(list, gridId, sem) {
+  var g = document.getElementById(gridId);
+  list.forEach(function(m) {
+    var n = (DOCS[m.id] || []).length;
+    var el = document.createElement('div');
+    el.className = 'mat-card';
+    el.style.color = m.color;
+    el.innerHTML =
+      '<div class="mat-card-top">' +
+        '<div class="mat-icon" style="background:'+m.bg+';color:'+m.color+'">'+m.abbr+'</div>' +
+        '<span class="mat-badge" style="background:'+m.bg+';color:'+m.color+'">'+sem+'</span>' +
+      '</div>' +
+      '<div class="mat-name">'+m.name+'</div>' +
+      '<div class="mat-full">'+(m.sub||'')+'</div>' +
+      '<div class="mat-docs"><span class="doc-chip">CM</span><span class="doc-chip">TD</span><span class="doc-chip">Fiches</span></div>' +
+      '<div class="mat-footer">' +
+        '<span class="mat-footer-count">'+(n>0?n+' document'+(n>1?'s':''):'0 document')+'</span>' +
+        '<span class="mat-open-btn">Ouvrir →</span>' +
+      '</div>';
+    (function(id){ el.addEventListener('click', function(){ openDrawer(id); }); })(m.id);
+    g.appendChild(el);
+  });
+}
+
+buildGrid(S3, 'grid-s3', 'S3');
+buildGrid(S4, 'grid-s4', 'S4');
+
+function findMat(id) {
+  var all = S3.concat(S4);
+  for (var i=0; i<all.length; i++) if (all[i].id===id) return all[i];
+  return null;
+}
 
 function openDrawer(id) {
+  var m = findMat(id);
+  if (!m) return;
   curMat = id;
   curTab = 'all';
-  const m = MATIERES[id];
-  document.getElementById('d-eyebrow').textContent = 'L2 · Semestre ' + m.sem;
-  document.getElementById('d-title').textContent = m.name;
-  document.querySelectorAll('.d-tab').forEach((t,i) => t.classList.toggle('on', i===0));
+  document.getElementById('d-eyebrow').textContent = 'L2 · Semestre ' + (S4.indexOf(m) >= 0 ? 'S4' : 'S3');
+  document.getElementById('d-title').textContent = m.name + (m.sub ? ' — ' + m.sub : '');
+  var tabs = document.querySelectorAll('.d-tab');
+  for (var i=0; i<tabs.length; i++) tabs[i].classList.toggle('on', i===0);
   renderDrawer();
   document.getElementById('overlay').classList.add('open');
   document.getElementById('drawer').classList.add('open');
@@ -1004,149 +281,94 @@ function closeDrawer() {
   document.body.style.overflow = '';
 }
 
-function setDTab(tab, el) {
+function setTab(tab, el) {
   curTab = tab;
-  document.querySelectorAll('.d-tab').forEach(t => t.classList.remove('on'));
+  var tabs = document.querySelectorAll('.d-tab');
+  for (var i=0; i<tabs.length; i++) tabs[i].classList.remove('on');
   el.classList.add('on');
   renderDrawer();
 }
 
 function renderDrawer() {
-  const body = document.getElementById('d-body');
-  const allDocs = DOCS[curMat] || [];
-  const fournis = allDocs.filter(d => d.type === 'fourni' || d.type === 'sujet');
-  const studentDocs = allDocs.filter(d => d.type !== 'fourni' && d.type !== 'sujet');
-  const filtered = curTab === 'all' ? studentDocs : studentDocs.filter(d => d.type === curTab);
+  var allDocs = DOCS[curMat] || [];
+  var fournis = allDocs.filter(function(d){ return d.type==='fourni'||d.type==='sujet'; });
+  var mine = allDocs.filter(function(d){ return d.type!=='fourni'&&d.type!=='sujet'; });
+  if (curTab!=='all') mine = mine.filter(function(d){ return d.type===curTab; });
 
-  const TYPE_BG_FOURNI = { fourni:'#EBF0FA', sujet:'#FBF0E3' };
-  const TYPE_LABEL_FOURNI = { fourni:'Document prof', sujet:'Sujet type' };
-  const TYPE_ABBR_FOURNI = { fourni:'DOC', sujet:'SUJ' };
-  const TYPE_COLOR_FOURNI = { fourni:'#1B3A6B', sujet:'#7A3D10' };
-
-  let html = '';
+  var h = '';
 
   if (fournis.length) {
-    html += '<div style="margin-bottom:1.5rem;">';
-    html += '<div style="font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);">Documents fournis par le prof</div>';
-    fournis.forEach((d, i) => {
-      html += '<div class="ddoc" style="margin-bottom:8px;">';
-      html += '<div class="ddoc-header" onclick="toggleFDoc(' + i + ')">';
-      html += '<div class="ddoc-icon" style="background:' + TYPE_BG_FOURNI[d.type] + ';color:' + TYPE_COLOR_FOURNI[d.type] + ';font-size:9px;font-weight:700;">' + TYPE_ABBR_FOURNI[d.type] + '</div>';
-      html += '<div class="ddoc-info"><div class="ddoc-title">' + d.title + '</div>';
-      html += '<div class="ddoc-sub">' + TYPE_LABEL_FOURNI[d.type] + ' · ' + d.date + '</div></div>';
-      html += '<span class="ddoc-toggle" id="ftog-' + i + '">▾</span></div>';
-      html += '<div class="ddoc-content" id="fdoc-' + i + '">';
-      html += '<p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:1rem;">' + d.desc + '</p>';
-      html += '<a class="pdf-link" href="#" onclick="openPdf(event,\'' + d.pdf + '\');">Ouvrir le PDF</a>';
-      html += '</div></div>';
+    h += '<div class="sec-label">Documents fournis par le prof</div>';
+    fournis.forEach(function(d,i) {
+      var bg = d.type==='sujet'?'#FBF0E3':'#EBF0FA';
+      var col = d.type==='sujet'?'#7A3D10':'#1B3A6B';
+      var abbr = d.type==='sujet'?'SUJ':'DOC';
+      var label = d.type==='sujet'?'Sujet type':'Document prof';
+      h += '<div class="ddoc">' +
+        '<div class="ddoc-header" onclick="toggle(\'f'+i+'\')">' +
+          '<div class="ddoc-icon" style="background:'+bg+';color:'+col+'">'+abbr+'</div>' +
+          '<div><div class="ddoc-title">'+d.title+'</div><div class="ddoc-sub">'+label+' · '+d.date+'</div></div>' +
+          '<span class="ddoc-toggle" id="ft'+i+'">▾</span>' +
+        '</div>' +
+        '<div class="ddoc-content" id="f'+i+'">' +
+          '<p class="ddoc-desc">'+d.desc+'</p>' +
+          '<a class="pdf-btn" href="#" onclick="openPdf(event,\''+d.pdf+'\',\''+d.title+'\')">Ouvrir le PDF</a>' +
+        '</div>' +
+      '</div>';
     });
-    html += '</div>';
   }
 
-  html += '<div style="font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);">Mes notes</div>';
+  h += '<div class="sec-label" style="margin-top:'+(fournis.length?'1.5rem':'0')+'">Mes notes</div>';
 
-  if (!filtered.length) {
-    html += '<div class="empty-drawer" style="padding:1.5rem 0;">';
-    html += '<div class="empty-drawer-title">Aucune note personnelle</div>';
-    html += '<div class="empty-drawer-sub">Ajoute tes CM, TD et fiches dans le tableau DOCS.</div>';
-    html += '</div>';
+  if (!mine.length) {
+    h += '<div class="empty-drawer"><div class="empty-title">Aucune note personnelle</div><div class="empty-sub">Ajoute tes CM, TD et fiches dans le tableau DOCS.</div></div>';
   } else {
-    filtered.forEach((d, i) => {
-      html += '<div class="ddoc">';
-      html += '<div class="ddoc-header" onclick="toggleDDoc('ddoc-' + i + '')">';
-      html += '<div class="ddoc-icon" style="background:' + TYPE_BG[d.type] + ';color:var(--text2);">' + TYPE_ICON[d.type] + '</div>';
-      html += '<div class="ddoc-info"><div class="ddoc-title">' + d.title + '</div>';
-      html += '<div class="ddoc-sub">' + TYPE_LABEL[d.type] + (d.date ? ' · ' + d.date : '') + '</div></div>';
-      html += '<span class="ddoc-toggle" id="toggle-' + i + '">▾</span></div>';
-      html += '<div class="ddoc-content" id="ddoc-' + i + '">';
-      if (d.content) html += d.content;
-      if (d.pdf) html += '<a class="pdf-link" href="#" onclick="openPdf(event,\'' + d.pdf + '\');">Ouvrir le PDF</a>';
-      html += '</div></div>';
+    mine.forEach(function(d,i) {
+      h += '<div class="ddoc">' +
+        '<div class="ddoc-header" onclick="toggle(\'m'+i+'\')">' +
+          '<div class="ddoc-icon" style="background:#EAF2EA;color:#2C5F2E">'+d.type.slice(0,2).toUpperCase()+'</div>' +
+          '<div><div class="ddoc-title">'+d.title+'</div><div class="ddoc-sub">'+d.type+(d.date?' · '+d.date:'')+'</div></div>' +
+          '<span class="ddoc-toggle" id="mt'+i+'">▾</span>' +
+        '</div>' +
+        '<div class="ddoc-content" id="m'+i+'">' +
+          (d.content||'') +
+          (d.pdf?'<a class="pdf-btn" href="#" onclick="openPdf(event,\''+d.pdf+'\',\''+d.title+'\')">Ouvrir le PDF</a>':'') +
+        '</div>' +
+      '</div>';
     });
   }
 
-  body.innerHTML = html;
+  document.getElementById('d-body').innerHTML = h;
 }
 
-function toggleFDoc(i) {
-  const el = document.getElementById('fdoc-' + i);
-  const tog = document.getElementById('ftog-' + i);
-  const isOpen = el.classList.contains('open');
-  el.classList.toggle('open', !isOpen);
-  tog.textContent = isOpen ? '▾' : '▴';
+function toggle(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var tog = document.getElementById(id.replace(/^(f|m)(\d+)$/, function(_,p,n){ return p+'t'+n; }));
+  var open = el.classList.toggle('open');
+  if (tog) tog.textContent = open ? '▴' : '▾';
 }
 
-
-function toggleDDoc(id) {
-  const el = document.getElementById(id);
-  const idx = id.split('-')[1];
-  const tog = document.getElementById('toggle-' + idx);
-  const isOpen = el.classList.contains('open');
-  el.classList.toggle('open', !isOpen);
-  tog.textContent = isOpen ? '▾' : '▴';
+function openPdf(e, path, title) {
+  e.preventDefault();
+  e.stopPropagation();
+  document.getElementById('pdf-name').textContent = title;
+  document.getElementById('pdf-frame').src = path;
+  document.getElementById('pdf-modal').classList.add('open');
 }
 
-  const win = window.open('', '_blank');
-  win.document.write('<html><body style="margin:0"><iframe src="' + data + '" style="width:100%;height:100vh;border:none;"></iframe>
-    <iframe id="pdf-modal-frame" src="" title="PDF"></iframe>
-  </div>
-</div>
-
-
-<!-- PDF MODAL -->
-<div class="pdf-modal-overlay" id="pdf-modal-overlay" onclick="handlePdfOverlay(event)">
-  <div class="pdf-modal">
-    <div class="pdf-modal-bar">
-      <span class="pdf-modal-title" id="pdf-modal-title">Document</span>
-      <button class="pdf-modal-close" onclick="closePdfModal()">&#x2715;</button>
-    </div>
-    <iframe id="pdf-modal-frame" src="" title="PDF viewer"></iframe>
-  </div>
-</div>
-</body></html>');
-  win.document.close();
+function closePdf() {
+  document.getElementById('pdf-modal').classList.remove('open');
+  document.getElementById('pdf-frame').src = '';
 }
 
-
-
-
-
-
-
-function openPdf(e, path) {
-  if (e) e.preventDefault();
-  document.getElementById('pdf-modal-title').textContent = path.split('/').pop().replace('.pdf','').replace(/_/g,' ');
-  document.getElementById('pdf-modal-frame').src = path;
-  document.getElementById('pdf-modal-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
+function handlePdfBg(e) {
+  if (e.target.id === 'pdf-modal') closePdf();
 }
 
-function closePdfModal() {
-  document.getElementById('pdf-modal-overlay').classList.remove('open');
-  document.getElementById('pdf-modal-frame').src = '';
-  document.body.style.overflow = '';
-}
-
-function handlePdfOverlay(e) {
-  if (e.target.id === 'pdf-modal-overlay') closePdfModal();
-}
-document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closePdfModal(); closeDrawer(); } });
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closePdf(); closeDrawer(); }
+});
 </script>
-
-    <iframe id="pdf-modal-frame" src="" title="PDF"></iframe>
-  </div>
-</div>
-
-
-<!-- PDF MODAL -->
-<div class="pdf-modal-overlay" id="pdf-modal-overlay" onclick="handlePdfOverlay(event)">
-  <div class="pdf-modal">
-    <div class="pdf-modal-bar">
-      <span class="pdf-modal-title" id="pdf-modal-title">Document</span>
-      <button class="pdf-modal-close" onclick="closePdfModal()">&#x2715;</button>
-    </div>
-    <iframe id="pdf-modal-frame" src="" title="PDF viewer"></iframe>
-  </div>
-</div>
 </body>
 </html>
