@@ -340,7 +340,7 @@ function renderDrawer() {
       h += '</div>';
       h += '<div class="ddoc-content" id="fdoc' + fi + '">';
       h += '<p class="ddoc-desc">' + d.desc + '</p>';
-      h += '<a class="pdf-btn" href="' + d.pdf + '" target="_blank">Ouvrir le PDF</a>';
+      h += '<a class="pdf-btn" href="#" onclick="openPdf(event,\"' + d.pdf + '\",\"' + d.title + '\")">Ouvrir le PDF</a>';
       h += '</div></div>';
     }
   }
@@ -377,7 +377,7 @@ function renderDrawer() {
       h += '<div class="ddoc-content" id="pdoc' + pi + '">';
       if (d.content) h += d.content;
       if (d.pdf) {
-        h += '<a class="pdf-btn" href="' + d.pdf + '" target="_blank">Ouvrir le PDF</a>';
+        h += '<a class="pdf-btn" href="#" onclick="openPdf(event,\"' + d.pdf + '\",\"' + d.title + '\")">Ouvrir le PDF</a>';
       }
       h += '</div></div>';
     }
