@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudySpace — Semestre 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #F5F3EE; --surface: #fff; --surface2: #EDEAE3;
+  --border: rgba(0,0,0,0.08); --border-md: rgba(0,0,0,0.14);
+  --text: #18160F; --text2: #7A776E; --text3: #B0ADA6;
+  --green: #2C5F2E; --green-light: #EAF2EA;
+  --radius: 14px; --radius-sm: 9px;
+}
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+nav { background: var(--surface); border-bottom: 1px solid var(--border); height: 58px; display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; }
+.logo { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--text); text-decoration: none; }
+.logo em { color: var(--green); font-style: normal; }
+.nav-links { display: flex; gap: 4px; list-style: none; }
+.nav-links a { font-size: 13px; color: var(--text2); text-decoration: none; padding: 6px 14px; border-radius: 99px; transition: background .15s; }
+.nav-links a:hover { background: var(--surface2); color: var(--text); }
+.nav-links a.on { background: var(--green-light); color: var(--green); font-weight: 500; }
+.hero { background: var(--surface); border-bottom: 1px solid var(--border); padding: 3.5rem 3rem 3rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; }
+.hero-eyebrow { font-size: 11px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: .1em; margin-bottom: .6rem; }
+.hero-title { font-family: 'Playfair Display', serif; font-size: 48px; color: var(--text); letter-spacing: -1px; line-height: 1.1; margin-bottom: .75rem; }
+.hero-sub { font-size: 15px; color: var(--text2); font-weight: 300; }
+.hero-stats { display: flex; gap: 2rem; align-items: flex-end; flex-shrink: 0; }
+.hero-stat-val { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--text); line-height: 1; text-align: right; }
+.hero-stat-lbl { font-size: 12px; color: var(--text3); margin-top: 3px; text-align: right; }
+.main { max-width: 980px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+.sem-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.5rem; }
+.sem-title { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--text); }
+.sem-count { font-size: 13px; color: var(--text3); }
+.sem-block { margin-bottom: 4rem; }
+.mat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.mat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; cursor: pointer; transition: box-shadow .2s, transform .2s, border-color .2s; position: relative; overflow: hidden; user-select: none; }
+.mat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: currentColor; opacity: .18; }
+.mat-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,.10); transform: translateY(-2px); border-color: var(--border-md); }
+.mat-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.25rem; }
+.mat-icon { width: 42px; height: 42px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+.mat-badge { font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 99px; text-transform: uppercase; }
+.mat-name { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.mat-full { font-size: 12px; color: var(--text3); margin-bottom: 1.25rem; }
+.mat-docs { display: flex; gap: 6px; flex-wrap: wrap; }
+.doc-chip { font-size: 11px; padding: 3px 9px; border-radius: 99px; border: 1px solid var(--border-md); color: var(--text2); background: var(--bg); }
+.mat-footer { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.mat-footer-count { font-size: 12px; color: var(--text3); }
+.mat-open-btn { font-size: 12px; color: var(--text2); }
+#overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(18,16,10,.45); z-index: 200; }
+#overlay.open { display: block; }
+#drawer { position: fixed; top: 0; right: 0; width: 520px; max-width: 92vw; height: 100%; background: var(--surface); z-index: 300; display: flex; flex-direction: column; overflow: hidden; transform: translateX(100%); transition: transform .28s ease; box-shadow: -4px 0 32px rgba(0,0,0,.12); }
+#drawer.open { transform: translateX(0); }
+.drawer-header { padding: 1.75rem 1.75rem 1.25rem; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-shrink: 0; }
+.drawer-eyebrow { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 5px; }
+.drawer-title { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--text); }
+.drawer-close { width: 32px; height: 32px; border-radius: 50%; background: var(--surface2); border: none; cursor: pointer; font-size: 16px; color: var(--text2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.drawer-close:hover { background: var(--border-md); }
+.drawer-tabs { display: flex; gap: 2px; padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+.d-tab { flex: 1; text-align: center; padding: 7px; font-size: 13px; border-radius: var(--radius-sm); cursor: pointer; border: none; background: none; color: var(--text2); font-family: 'DM Sans', sans-serif; }
+.d-tab.on { background: var(--bg); color: var(--text); font-weight: 500; }
+.drawer-body { flex: 1; overflow-y: auto; padding: 1.5rem 1.75rem; }
+.sec-label { font-size: 11px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: .08em; margin-bottom: .75rem; padding-bottom: .6rem; border-bottom: 1px solid var(--border); }
+.ddoc { border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 10px; overflow: hidden; }
+.ddoc-header { display: flex; align-items: center; gap: 12px; padding: .9rem 1.1rem; cursor: pointer; }
+.ddoc-header:hover { background: var(--bg); }
+.ddoc-icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
+.ddoc-title { font-size: 14px; font-weight: 500; color: var(--text); }
+.ddoc-sub { font-size: 12px; color: var(--text3); margin-top: 1px; }
+.ddoc-toggle { margin-left: auto; font-size: 11px; color: var(--text3); }
+.ddoc-content { border-top: 1px solid var(--border); padding: 1.1rem 1.25rem; background: var(--bg); display: none; }
+.ddoc-content.open { display: block; }
+.ddoc-desc { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 1rem; }
+.pdf-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--border-md); border-radius: 8px; padding: 8px 14px; font-size: 13px; font-weight: 500; color: var(--text); cursor: pointer; text-decoration: none; }
+.pdf-btn:hover { box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.empty-drawer { text-align: center; padding: 2rem .5rem; }
+.empty-title { font-size: 14px; font-weight: 500; color: var(--text2); margin-bottom: 4px; }
+.empty-sub { font-size: 13px; color: var(--text3); }
+#pdf-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10,8,4,.7); z-index: 500; padding: 4vh 5vw; }
+#pdf-modal.open { display: block; }
+.pdf-modal-inner { background: #fff; border-radius: 12px; overflow: hidden; width: 100%; height: 100%; display: flex; flex-direction: column; }
+.pdf-modal-bar { display: flex; align-items: center; justify-content: space-between; padding: .75rem 1.25rem; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+.pdf-modal-name { font-size: 14px; font-weight: 500; color: var(--text); }
+.pdf-modal-close { background: var(--surface2); border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 14px; color: var(--text2); }
+.pdf-modal-close:hover { background: var(--border-md); }
+#pdf-frame { flex: 1; border: none; width: 100%; height: 100%; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-thumb { background: var(--border-md); border-radius: 99px; }
+@media (max-width: 720px) {
+  nav { padding: 0 1.25rem; }
+  .hero { flex-direction: column; padding: 2rem 1.5rem; }
+  .main { padding: 2rem 1.25rem 4rem; }
+  .mat-grid { grid-template-columns: 1fr 1fr; }
+  #drawer { width: 100%; max-width: 100%; }
+}
+@media (max-width: 480px) { .mat-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#">Study<em>Space</em></a>
+  <ul class="nav-links">
+    <li><a href="#">Accueil</a></li>
+    <li><a href="#">S1</a></li>
+    <li><a href="#">S2</a></li>
+    <li><a href="#" class="on">S3</a></li>
+    <li><a href="index.html">S4</a></li>
+    <li><a href="#">S5</a></li>
+    <li><a href="#">S6</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">Licence 2 — 2025–2026</div>
+    <h1 class="hero-title">Semestre 3</h1>
+    <p class="hero-sub">Clique sur une matière pour accéder à tes documents.</p>
+  </div>
+
+</div>
+
+<div class="main">
+  <div class="sem-block">
+    <div class="mat-grid" id="grid-s3"></div>
+  </div>
+</div>
+
+<div id="overlay" onclick="closeDrawer()"></div>
+
+<div id="drawer">
+  <div class="drawer-header">
+    <div>
+      <div class="drawer-eyebrow" id="d-eyebrow"></div>
+      <div class="drawer-title" id="d-title"></div>
+    </div>
+    <button class="drawer-close" onclick="closeDrawer()">&#x2715;</button>
+  </div>
+  <div class="drawer-tabs" id="drawer-tabs">
+    <button class="d-tab on" onclick="setTab('all',this)">Tous</button>
+    <button class="d-tab" onclick="setTab('cm',this)">CM</button>
+    <button class="d-tab" onclick="setTab('td',this)">TD</button>
+    <button class="d-tab" onclick="setTab('fiche',this)">Fiches</button>
+  </div>
+  <div class="drawer-body" id="d-body"></div>
+</div>
+
+<div id="pdf-modal" onclick="handlePdfBg(event)">
+  <div class="pdf-modal-inner">
+    <div class="pdf-modal-bar">
+      <span class="pdf-modal-name" id="pdf-name">Document</span>
+      <button class="pdf-modal-close" onclick="closePdf()">&#x2715;</button>
+    </div>
+    <iframe id="pdf-frame" src=""></iframe>
+  </div>
+</div>
+
+<script>
+var S4 = [
+  {id:'biomeca',      name:'Biomécanique',   abbr:'BM', color:'#1B3A6B', bg:'#EBF0FA'},
+  {id:'anatomie',     name:'Anatomie',        abbr:'AN', color:'#2C5F2E', bg:'#EAF2EA'},
+  {id:'physionomi',   name:'Physionomie',     abbr:'PH', color:'#6B2C52', bg:'#F5EAF0'},
+  {id:'psycho',       name:'Psychologie',     abbr:'PS', color:'#6B4F1B', bg:'#F5F0EA'},
+  {id:'neuro',        name:'Neurologie',      abbr:'NE', color:'#1B3A6B', bg:'#EBF0FA'},
+  {id:'socio',        name:'Sociologie',      abbr:'SO', color:'#2C5F2E', bg:'#EAF2EA'},
+  {id:'histoire',     name:'Histoire',        abbr:'HI', color:'#6B2C52', bg:'#F5EAF0'},
+  {id:'anglais-s3',   name:'Anglais',         abbr:'EN', color:'#1B5A5E', bg:'#EAF4F4'},
+  {id:'muscu',        name:'Polyvalence 1',   abbr:'P1', color:'#6B4F1B', bg:'#F5F0EA', sub:'Musculation'},
+  {id:'escalade',     name:'Polyvalence 2',   abbr:'P2', color:'#4A1B6B', bg:'#F0EAF5', sub:'Escalade'},
+  {id:'spe-s3',       name:'Spécialité',      abbr:'JD', color:'#6B2C52', bg:'#F5EAF0', sub:'Judo'}
+];
+
+// Matières sans onglets CM/TD/Fiches (sports)
+var NO_TABS = ['muscu', 'escalade', 'spe-s3'];
+
+var DOCS = {};
+
+var curMat = null;
+var curTab = 'all';
+
+function buildGrid(list, gridId, sem) {
+  var g = document.getElementById(gridId);
+  list.forEach(function(m) {
+    var n = (DOCS[m.id] || []).length;
+    var el = document.createElement('div');
+    el.className = 'mat-card';
+    el.style.color = m.color;
+    el.innerHTML =
+      '<div class="mat-card-top">' +
+        '<div class="mat-icon" style="background:' + m.bg + ';color:' + m.color + '">' + m.abbr + '</div>' +
+        '<span class="mat-badge" style="background:' + m.bg + ';color:' + m.color + '">' + sem + '</span>' +
+      '</div>' +
+      '<div class="mat-name">' + m.name + '</div>' +
+      '<div class="mat-full">' + (m.sub || '') + '</div>' +
+      (NO_TABS.indexOf(m.id) === -1 ? '<div class="mat-docs"><span class="doc-chip">CM</span><span class="doc-chip">TD</span><span class="doc-chip">Fiches</span></div>' : '') +
+      '<div class="mat-footer">' +
+        '<span class="mat-footer-count">' + (n > 0 ? n + ' document' + (n > 1 ? 's' : '') : '0 document') + '</span>' +
+        '<span class="mat-open-btn">Ouvrir \u2192</span>' +
+      '</div>';
+    (function(id) {
+      el.addEventListener('click', function() { openDrawer(id); });
+    })(m.id);
+    g.appendChild(el);
+  });
+}
+
+buildGrid(S4, 'grid-s3', 'S3');
+
+function findMat(id) {
+  var all = S3.concat(S4);
+  for (var i = 0; i < all.length; i++) {
+    if (all[i].id === id) return all[i];
+  }
+  return null;
+}
+
+function openDrawer(id) {
+  var m = findMat(id);
+  if (!m) return;
+  curMat = id;
+  curTab = 'all';
+  var inS4 = false;
+  for (var i = 0; i < S4.length; i++) { if (S4[i].id === id) { inS4 = true; break; } }
+  document.getElementById('d-eyebrow').textContent = 'L2 \u00b7 Semestre ' + (inS4 ? 'S4' : 'S3');
+  document.getElementById('d-title').textContent = m.name + (m.sub ? ' \u2014 ' + m.sub : '');
+  var tabs = document.querySelectorAll('.d-tab');
+  for (var t = 0; t < tabs.length; t++) tabs[t].classList.toggle('on', t === 0);
+  var noTabs = NO_TABS.indexOf(id) !== -1;
+  document.getElementById('drawer-tabs').style.display = noTabs ? 'none' : 'flex';
+  renderDrawer();
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('drawer').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDrawer() {
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('drawer').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function setTab(tab, el) {
+  curTab = tab;
+  var tabs = document.querySelectorAll('.d-tab');
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('on');
+  el.classList.add('on');
+  renderDrawer();
+}
+
+function renderDrawer() {
+  var allDocs = DOCS[curMat] || [];
+  var noTabs = NO_TABS.indexOf(curMat) !== -1;
+  var fournis = allDocs.filter(function(d){ return d.type==='fourni'||d.type==='sujet'; });
+  var scholar = allDocs.filter(function(d){ return d.type==='scholar'; });
+  var mine = allDocs.filter(function(d){ return d.type!=='fourni'&&d.type!=='sujet'&&d.type!=='scholar'; });
+  if (!noTabs && curTab!=='all') mine = mine.filter(function(d){ return d.type===curTab; });
+
+  var h = '';
+
+  if (fournis.length) {
+    h += '<div class="sec-label">Documents fournis par le prof</div>';
+    fournis.forEach(function(d,i) {
+      var bg = d.type==='sujet'?'#FBF0E3':'#EBF0FA';
+      var col = d.type==='sujet'?'#7A3D10':'#1B3A6B';
+      var abbr = d.type==='sujet'?'SUJ':'DOC';
+      var label = d.type==='sujet'?'Sujet type':'Document prof';
+      h += '<div class="ddoc">' +
+        '<div class="ddoc-header" onclick="toggle(\'f'+i+'\')">' +
+          '<div class="ddoc-icon" style="background:'+bg+';color:'+col+'">'+abbr+'</div>' +
+          '<div><div class="ddoc-title">'+d.title+'</div><div class="ddoc-sub">'+label+' \u00b7 '+d.date+'</div></div>' +
+          '<span class="ddoc-toggle" id="ft'+i+'">\u25be</span>' +
+        '</div>' +
+        '<div class="ddoc-content" id="f'+i+'">' +
+          '<p class="ddoc-desc">'+d.desc+'</p>' +
+          '<a class="pdf-btn" href="#" onclick="openPdf(event,\''+d.pdf+'\',\''+d.title+'\')">Ouvrir le PDF</a>' +
+        '</div>' +
+      '</div>';
+    });
+  }
+
+  var secTitle = noTabs ? 'Documents personnels' : 'Mes notes';
+  h += '<div class="sec-label" style="margin-top:'+(fournis.length?'1.5rem':'0')+'">'+secTitle+'</div>';
+
+  var personal = noTabs ? scholar : mine;
+
+  if (!personal.length) {
+    h += '<div class="empty-drawer"><div class="empty-title">Aucun document</div>';
+    h += '<div class="empty-sub">'+(noTabs?'Ajoute tes ressources avec type: scholar.':'Ajoute tes CM, TD et fiches dans le tableau DOCS.')+'</div></div>';
+  } else {
+    personal.forEach(function(d,i) {
+      var pbg = noTabs?'#F0EAF5':'#EAF2EA';
+      var pcol = noTabs?'#4A1B6B':'#2C5F2E';
+      var pabbr = noTabs?'SCH':d.type.slice(0,2).toUpperCase();
+      h += '<div class="ddoc">' +
+        '<div class="ddoc-header" onclick="toggle(\'p'+i+'\')">' +
+          '<div class="ddoc-icon" style="background:'+pbg+';color:'+pcol+'">'+pabbr+'</div>' +
+          '<div><div class="ddoc-title">'+d.title+'</div><div class="ddoc-sub">'+(d.date||'')+'</div></div>' +
+          '<span class="ddoc-toggle" id="pt'+i+'">\u25be</span>' +
+        '</div>' +
+        '<div class="ddoc-content" id="p'+i+'">' +
+          (d.content||'') +
+          (d.pdf?'<a class="pdf-btn" href="#" onclick="openPdf(event,\''+d.pdf+'\',\''+d.title+'\')">Ouvrir le PDF</a>':'') +
+        '</div>' +
+      '</div>';
+    });
+  }
+
+  document.getElementById('d-body').innerHTML = h;
+}
+
+
+function toggle(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var isOpen = el.classList.toggle('open');
+  var prefix = id.charAt(0);
+  var num = id.slice(1);
+  var tog = document.getElementById(prefix+'t'+num);
+  if (tog) tog.textContent = isOpen ? '▴' : '▾';
+}
+
+
+function openPdf(e, path, title) {
+  e.preventDefault();
+  e.stopPropagation();
+  document.getElementById('pdf-name').textContent = title;
+  document.getElementById('pdf-frame').src = path;
+  document.getElementById('pdf-modal').classList.add('open');
+}
+
+function closePdf() {
+  document.getElementById('pdf-modal').classList.remove('open');
+  document.getElementById('pdf-frame').src = '';
+}
+
+function handlePdfBg(e) {
+  if (e.target.id === 'pdf-modal') closePdf();
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closePdf(); closeDrawer(); }
+});
+</script>
+</body>
+</html>
