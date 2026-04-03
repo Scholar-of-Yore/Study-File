@@ -166,6 +166,116 @@ nav { background: var(--surface); border-bottom: 1px solid var(--border); height
 .exam-duration { font-size: 11px; color: var(--text3); margin-top: 2px; }
 .exam-room { font-size: 11px; color: var(--text3); margin-top: 1px; }
 
+
+.todo-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  margin-top: 2.5rem;
+}
+.todo-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+.todo-title { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--text); }
+.todo-form { display: flex; gap: 8px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.todo-input {
+  flex: 1; min-width: 180px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  outline: none;
+  transition: border-color .15s;
+}
+.todo-input:focus { border-color: var(--green); background: var(--surface); }
+.todo-date {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  outline: none;
+  transition: border-color .15s;
+}
+.todo-date:focus { border-color: var(--green); background: var(--surface); }
+.todo-add-btn {
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: opacity .15s;
+  white-space: nowrap;
+}
+.todo-add-btn:hover { opacity: .85; }
+.todo-list { display: flex; flex-direction: column; gap: 8px; }
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #FDFCF9;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: var(--radius-sm);
+  padding: .75rem 1rem;
+  transition: opacity .2s;
+}
+.todo-item.urgent { border-left: 3px solid #E24B4A; }
+.todo-item.soon { border-left: 3px solid #BA7517; }
+.todo-checkbox {
+  width: 18px; height: 18px;
+  border: 1.5px solid var(--border-md);
+  border-radius: 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+  appearance: none;
+  background: var(--surface);
+  transition: all .15s;
+}
+.todo-checkbox:checked { background: var(--green); border-color: var(--green); }
+.todo-checkbox:checked::after {
+  content: '';
+  display: block;
+  width: 5px; height: 9px;
+  border: 2px solid #fff;
+  border-top: none; border-left: none;
+  transform: rotate(45deg) translate(2px, -1px);
+  margin: 1px auto;
+}
+.todo-text { flex: 1; font-size: 14px; color: var(--text); }
+.todo-date-badge {
+  font-size: 11px;
+  color: var(--text3);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.todo-date-badge.urgent { color: #E24B4A; font-weight: 500; }
+.todo-date-badge.soon { color: #BA7517; font-weight: 500; }
+.todo-del {
+  background: none; border: none; cursor: pointer;
+  color: var(--text3); font-size: 16px;
+  padding: 0 4px; line-height: 1;
+  transition: color .15s; flex-shrink: 0;
+}
+.todo-del:hover { color: #E24B4A; }
+.todo-empty { text-align: center; padding: 1.5rem; font-size: 13px; color: var(--text3); }
+.todo-filters { display: flex; gap: 6px; margin-bottom: 1rem; }
+.todo-filter {
+  font-size: 12px; padding: 4px 12px;
+  border-radius: 99px; border: 1px solid var(--border);
+  cursor: pointer; color: var(--text2);
+  background: none; font-family: 'DM Sans', sans-serif;
+  transition: all .12s;
+}
+.todo-filter.on { background: var(--text); color: var(--bg); border-color: var(--text); }
 </style>
 </head>
 <body>
@@ -275,6 +385,23 @@ nav { background: var(--surface); border-bottom: 1px solid var(--border); height
     </div>
   </div>
 
+
+  <div class="todo-card">
+    <div class="todo-header">
+      <div class="todo-title">Tâches à faire</div>
+    </div>
+    <div class="todo-form">
+      <input class="todo-input" id="todo-text" placeholder="Nouvelle tâche..." />
+      <input class="todo-date" id="todo-date" type="date" />
+      <button class="todo-add-btn" onclick="addTodo()">+ Ajouter</button>
+    </div>
+    <div class="todo-filters">
+      <button class="todo-filter on" onclick="setTodoFilter('all', this)">Toutes</button>
+      <button class="todo-filter" onclick="setTodoFilter('today', this)">Aujourd'hui</button>
+      <button class="todo-filter" onclick="setTodoFilter('week', this)">Cette semaine</button>
+    </div>
+    <div class="todo-list" id="todo-list"></div>
+  </div>
 
 </div>
 
@@ -485,6 +612,130 @@ function render() {
 
 curWeek = detectCurrentWeek();
 render();
+
+// ── TODO LIST ─────────────────────────────────────────────────────
+var TODO_KEY = 'studyspace_todos';
+var todoFilter = 'all';
+
+function loadTodos() {
+  try { return JSON.parse(localStorage.getItem(TODO_KEY) || '[]'); }
+  catch(e) { return []; }
+}
+
+function saveTodos(todos) {
+  localStorage.setItem(TODO_KEY, JSON.stringify(todos));
+}
+
+function addTodo() {
+  var text = document.getElementById('todo-text').value.trim();
+  var date = document.getElementById('todo-date').value;
+  if (!text) { document.getElementById('todo-text').focus(); return; }
+  var todos = loadTodos();
+  todos.push({ id: Date.now(), text: text, date: date, done: false });
+  saveTodos(todos);
+  document.getElementById('todo-text').value = '';
+  document.getElementById('todo-date').value = '';
+  renderTodos();
+}
+
+function toggleTodo(id) {
+  var todos = loadTodos();
+  todos = todos.map(function(t) {
+    if (t.id === id) t.done = !t.done;
+    return t;
+  });
+  saveTodos(todos);
+  setTimeout(function() { renderTodos(); }, 400);
+}
+
+function deleteTodo(id) {
+  var todos = loadTodos().filter(function(t) { return t.id !== id; });
+  saveTodos(todos);
+  renderTodos();
+}
+
+function setTodoFilter(f, el) {
+  todoFilter = f;
+  document.querySelectorAll('.todo-filter').forEach(function(b) { b.classList.remove('on'); });
+  el.classList.add('on');
+  renderTodos();
+}
+
+function urgencyClass(dateStr) {
+  if (!dateStr) return '';
+  var today = new Date(); today.setHours(0,0,0,0);
+  var d = new Date(dateStr);
+  var diff = Math.round((d - today) / 86400000);
+  if (diff <= 1) return 'urgent';
+  if (diff <= 7) return 'soon';
+  return '';
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  var d = new Date(dateStr);
+  var today = new Date(); today.setHours(0,0,0,0);
+  var diff = Math.round((d - today) / 86400000);
+  if (diff === 0) return "Aujourd'hui";
+  if (diff === 1) return 'Demain';
+  if (diff < 0) return 'En retard';
+  return d.toLocaleDateString('fr-FR', { day:'numeric', month:'short' });
+}
+
+function renderTodos() {
+  var todos = loadTodos().filter(function(t) { return !t.done; });
+  var today = new Date(); today.setHours(0,0,0,0);
+  var endOfWeek = new Date(today); endOfWeek.setDate(today.getDate() + 7);
+
+  if (todoFilter === 'today') {
+    todos = todos.filter(function(t) {
+      if (!t.date) return false;
+      var d = new Date(t.date);
+      return d.getTime() === today.getTime();
+    });
+  } else if (todoFilter === 'week') {
+    todos = todos.filter(function(t) {
+      if (!t.date) return false;
+      var d = new Date(t.date);
+      return d >= today && d <= endOfWeek;
+    });
+  }
+
+  // Sort by date
+  todos.sort(function(a, b) {
+    if (!a.date && !b.date) return 0;
+    if (!a.date) return 1;
+    if (!b.date) return -1;
+    return new Date(a.date) - new Date(b.date);
+  });
+
+  var list = document.getElementById('todo-list');
+  if (!todos.length) {
+    list.innerHTML = '<div class="todo-empty">Aucune tâche — profites-en !</div>';
+    return;
+  }
+
+  var h = '';
+  todos.forEach(function(t) {
+    var urg = urgencyClass(t.date);
+    var dateLabel = formatDate(t.date);
+    h += '<div class="todo-item ' + urg + '" id="ti-' + t.id + '">';
+    h += '<input type="checkbox" class="todo-checkbox" onchange="toggleTodo(' + t.id + ')">';
+    h += '<span class="todo-text">' + t.text + '</span>';
+    if (dateLabel) h += '<span class="todo-date-badge ' + urg + '">' + dateLabel + '</span>';
+    h += '<button class="todo-del" onclick="deleteTodo(' + t.id + ')">&#x2715;</button>';
+    h += '</div>';
+  });
+  list.innerHTML = h;
+}
+
+// Allow Enter key to add todo
+document.getElementById('todo-text').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') addTodo();
+});
+
+renderTodos();
+
 
 
 </script>
